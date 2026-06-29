@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ar" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>برج المراقبة | لوحة تحكم وزارة الداخلية</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary-fixed-dim": "#ffb4aa",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#e1e3e4",
+              "on-tertiary-fixed": "#191c1d",
+              "background": "#0c0a0a", // Adjusted for high-contrast dark mode terminal feel
+              "primary-fixed": "#ffdad5",
+              "secondary-container": "#a0f399",
+              "on-primary-container": "#ffaca1",
+              "on-surface": "#e1e1e1",
+              "on-secondary-fixed": "#002204",
+              "on-secondary-container": "#217128",
+              "secondary-fixed": "#a3f69c",
+              "error": "#ba1a1a",
+              "surface-variant": "#2d2a2a",
+              "on-primary-fixed-variant": "#812820",
+              "on-background": "#fcf9f8",
+              "surface-tint": "#a03f34",
+              "outline-variant": "#4d4443",
+              "inverse-surface": "#f3f0ef",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#1b1c1c",
+              "on-primary-fixed": "#410001",
+              "tertiary-fixed-dim": "#c5c7c8",
+              "surface-container": "#1c1a1a",
+              "secondary": "#1b6d24",
+              "on-tertiary-container": "#c0c2c3",
+              "on-secondary-fixed-variant": "#005312",
+              "tertiary-container": "#4d5051",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#151212",
+              "error-container": "#410002",
+              "on-tertiary-fixed-variant": "#454748",
+              "surface-container-high": "#282525",
+              "surface": "#0f0d0d",
+              "surface-dim": "#0c0a0a",
+              "primary-container": "#8c3027",
+              "on-error": "#ffffff",
+              "tertiary": "#36393a",
+              "primary": "#ff4d3d", // Brighter red for terminal visibility
+              "outline": "#89726e",
+              "surface-container-highest": "#332f2f",
+              "on-surface-variant": "#ddc0bc",
+              "surface-bright": "#1c1a1a",
+              "inverse-primary": "#ffb4aa",
+              "secondary-fixed-dim": "#88d982"
+            },
+            "spacing": {
+              "md": "16px",
+              "xs": "8px",
+              "gutter": "16px",
+              "xl": "32px",
+              "margin-mobile": "20px",
+              "lg": "24px",
+              "sm": "12px",
+              "base": "4px"
+            },
+            "fontFamily": {
+              "body-lg": ["Be Vietnam Pro"],
+              "label-sm": ["Be Vietnam Pro"],
+              "label-md": ["Be Vietnam Pro"],
+              "headline-lg": ["Be Vietnam Pro"],
+              "headline-md": ["Be Vietnam Pro"],
+              "body-sm": ["Be Vietnam Pro"],
+              "label-lg": ["Be Vietnam Pro"],
+              "body-md": ["Be Vietnam Pro"],
+              "headline-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+              "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+              "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+              "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+              "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+              "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+              "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+              "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+              "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        background-color: #0c0a0a;
+        color: #e1e1e1;
+      }
+      .terminal-scroll::-webkit-scrollbar {
+        width: 4px;
+      }
+      .terminal-scroll::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+      }
+      .terminal-scroll::-webkit-scrollbar-thumb {
+        background: #8c3027;
+        border-radius: 2px;
+      }
+      .glow-red {
+        box-shadow: 0 0 15px rgba(140, 48, 39, 0.3);
+      }
+      .status-pulse {
+        animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-red {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+      .map-container {
+        filter: grayscale(1) invert(0.9) sepia(0.2) hue-rotate(320deg) contrast(1.2);
+      }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center px-lg h-16 w-full bg-background border-b border-outline-variant z-50">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-[32px]">shield_person</span>
+<div>
+<h1 class="text-headline-sm font-headline-lg font-bold text-primary tracking-tight">برج المراقبة</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">وزارة الداخلية | MOI-TERM-967</p>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex flex-col items-end border-r border-outline-variant pr-md">
+<span class="text-label-md font-label-md text-on-surface">حالة النظام: مثالية</span>
+<span class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> 
+                    تم التحقق من 142 عقدة
+                </span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-lg hover:bg-surface-variant/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-variant/20 transition-all relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center gap-xs ml-md">
+<div class="text-right">
+<p class="text-label-lg font-label-lg text-on-surface">أحمد منصور</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">المشرف العام</p>
+</div>
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col w-72 bg-surface-container-low border-r border-outline-variant p-md gap-xs">
+<nav class="space-y-1">
+<a class="flex items-center gap-md p-md bg-primary-container text-on-primary-container font-semibold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-body-md font-body-md">لوحة تحكم الوزارة</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-body-md font-body-md">سجل الأملاك</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-body-md font-body-md">نقل المركبات</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-body-md font-body-md">التحليلات الإقليمية</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="text-body-md font-body-md">سجلات الأمان</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-variant/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">إعدادات المحطة</span>
+</a>
+</nav>
+<div class="mt-auto p-md bg-surface-container-high rounded-xl border border-outline-variant space-y-md">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">جلسة مشفرة</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">lock</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex-1 bg-background h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-2/3 h-full"></div>
+</div>
+<span class="text-label-sm font-label-sm text-primary">64%</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant leading-tight">تنتهي صلاحية رمز الجلسة بعد 12:45د. إعادة التحقق إلزامية.</p>
+</div>
+</aside>
+<!-- Main Dashboard Content -->
+<main class="flex-1 overflow-y-auto p-lg bg-background terminal-scroll">
+<!-- Dashboard Grid Layout -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- TOP ROW: Stats Overview -->
+<div class="col-span-12 md:col-span-3 bg-surface-container rounded-xl border border-outline-variant p-lg flex flex-col gap-xs">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">الحجم اليومي</span>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">12,842</div>
+<div class="text-label-sm font-label-sm text-secondary">بزيادة 12% عن أمس</div>
+</div>
+<div class="col-span-12 md:col-span-3 bg-surface-container rounded-xl border border-outline-variant p-lg flex flex-col gap-xs">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">تحويلات الأصول</span>
+<span class="material-symbols-outlined text-secondary">sync_alt</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">8,401</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">قيد المعالجة: 412</div>
+</div>
+<div class="col-span-12 md:col-span-3 bg-surface-container rounded-xl border border-outline-variant p-lg flex flex-col gap-xs">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">فحوصات الهوية</span>
+<span class="material-symbols-outlined text-primary">badge</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">245,012</div>
+<div class="text-label-sm font-label-sm text-secondary">معدل نجاح 99.8%</div>
+</div>
+<div class="col-span-12 md:col-span-3 bg-primary-container rounded-xl p-lg flex flex-col gap-xs relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">warning</span>
+</div>
+<div class="flex justify-between items-start z-10">
+<span class="text-label-lg font-label-lg text-on-primary-container">التنبيهات الحرجة</span>
+<span class="material-symbols-outlined text-white status-pulse">emergency</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-white z-10">14 نشط</div>
+<div class="text-label-sm font-label-sm text-primary-fixed z-10 font-bold underline cursor-pointer">عرض قائمة الحوادث</div>
+</div>
+<!-- MIDDLE ROW: Map & Flagged Transactions -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col h-[500px]">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-high/50">
+<h2 class="text-headline-sm font-headline-sm flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">map</span> خريطة المعاملات الحرارية الإقليمية
+                        </h2>
+<div class="flex gap-sm">
+<span class="px-3 py-1 bg-background text-label-sm font-label-sm rounded-full border border-outline-variant">التغذية الفورية</span>
+<span class="px-3 py-1 bg-primary/20 text-primary text-label-sm font-label-sm rounded-full border border-primary/30">كثافة عالية</span>
+</div>
+</div>
+<div class="flex-1 relative bg-[#0a0a0a] overflow-hidden">
+<div class="absolute inset-0 map-container opacity-40 bg-cover bg-center" data-alt="A stylized, high-contrast dark military tactical map of Yemen, showing governorate borders and glowing red data points representing transaction activity. The aesthetic is clean, digital, and institutional, with grid lines and topographic detail, presented in a minimalist dark-mode terminal style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc4oCePeFyw9jJehAhQCIM_IFyBMWXVFf1St_pScSVvMy0TskVttdttMS04RZvl9Cq5F-f7QH8ye8M9Xlfn1xWkzX9o-TRRxdjoxtgu2-vB4JvrTxo_ifxURJFUuf01sXRT0fC3yHPLga9yrAguuSr-0Fs-UhzcGdOCmiOqPadPk3S4j_BwTJkIOTEETLyJNorFnOVFkUtNUVMzmmNK54qHEF_uY-O3PgIKL6B0Y8mAAaXiVNq7_t3dA')"></div>
+<!-- Floating Map Labels -->
+<div class="absolute top-1/4 left-1/4 group cursor-pointer">
+<div class="w-4 h-4 bg-primary rounded-full status-pulse"></div>
+<div class="absolute top-0 left-6 bg-surface-container-highest border border-outline-variant p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none w-48 shadow-xl">
+<p class="text-label-lg font-bold">مديرية صنعاء</p>
+<p class="text-label-sm text-on-surface-variant">4,210 نشط | 2 تنبيهات</p>
+</div>
+</div>
+<div class="absolute bottom-1/4 right-1/3 group cursor-pointer">
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+<div class="absolute top-0 left-6 bg-surface-container-highest border border-outline-variant p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all pointer-events-none w-48 shadow-xl">
+<p class="text-label-lg font-bold">ميناء عدن</p>
+<p class="text-label-sm text-on-surface-variant">1,890 نشط | 0 تنبيهات</p>
+</div>
+</div>
+<!-- Analytics Overlay -->
+<div class="absolute bottom-md left-md right-md flex gap-md">
+<div class="flex-1 bg-surface-container-high/90 backdrop-blur-md p-md rounded-lg border border-outline-variant">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase mb-2">نشاط تعز</p>
+<div class="h-12 flex items-end gap-1">
+<div class="flex-1 bg-primary/40 h-1/2"></div>
+<div class="flex-1 bg-primary/40 h-2/3"></div>
+<div class="flex-1 bg-primary h-full"></div>
+<div class="flex-1 bg-primary/40 h-3/4"></div>
+<div class="flex-1 bg-primary/40 h-1/2"></div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-high/90 backdrop-blur-md p-md rounded-lg border border-outline-variant">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase mb-2">نشاط المكلا</p>
+<div class="h-12 flex items-end gap-1">
+<div class="flex-1 bg-secondary/40 h-1/3"></div>
+<div class="flex-1 bg-secondary/40 h-1/2"></div>
+<div class="flex-1 bg-secondary/40 h-2/3"></div>
+<div class="flex-1 bg-secondary h-1/2"></div>
+<div class="flex-1 bg-secondary/40 h-1/4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant flex flex-col h-[500px]">
+<div class="p-lg border-b border-outline-variant bg-surface-container-high/50 flex justify-between items-center">
+<h2 class="text-headline-sm font-headline-sm flex items-center gap-md text-primary">
+<span class="material-symbols-outlined">warning</span> النشاط المبلغ عنه
+                        </h2>
+<button class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors">حل الكل</button>
+</div>
+<div class="flex-1 overflow-y-auto terminal-scroll p-md space-y-md">
+<!-- Flagged Item -->
+<div class="p-md rounded-lg border-l-4 border-primary bg-surface-container-highest flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="text-label-sm font-bold bg-primary/20 text-primary px-2 py-0.5 rounded uppercase">خطر مرتفع (88)</span>
+<span class="text-label-sm text-on-surface-variant">منذ 2د</span>
+</div>
+<p class="text-body-md font-bold text-on-surface">بيع عقار: ID-9021-YE</p>
+<p class="text-body-sm text-on-surface-variant">تم اكتشاف بطاقة ذكية مكررة في سجل أراضي الحديدة. محاولة انتحال محتملة.</p>
+<div class="flex gap-sm mt-xs">
+<button class="flex-1 py-1.5 bg-primary text-white text-label-sm rounded-lg font-bold">اعتراض</button>
+<button class="flex-1 py-1.5 bg-background border border-outline-variant text-label-sm rounded-lg">تدقيق</button>
+</div>
+</div>
+<!-- Flagged Item 2 -->
+<div class="p-md rounded-lg border-l-4 border-primary bg-surface-container-highest flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="text-label-sm font-bold bg-primary/20 text-primary px-2 py-0.5 rounded uppercase">خطر متوسط (64)</span>
+<span class="text-label-sm text-on-surface-variant">منذ 15د</span>
+</div>
+<p class="text-body-md font-bold text-on-surface">نقل مركبة: تويوتا هايلكس</p>
+<p class="text-body-sm text-on-surface-variant">عدم تطابق رقم الهيكل مع قاعدة بيانات الجمارك الوطنية. المنشأ: ميناء غير معروف.</p>
+<div class="flex gap-sm mt-xs">
+<button class="flex-1 py-1.5 bg-primary text-white text-label-sm rounded-lg font-bold">تحقيق</button>
+<button class="flex-1 py-1.5 bg-background border border-outline-variant text-label-sm rounded-lg">إطلاق</button>
+</div>
+</div>
+<!-- Flagged Item 3 -->
+<div class="p-md rounded-lg border-l-4 border-primary/40 bg-surface-container-highest flex flex-col gap-sm opacity-60">
+<div class="flex justify-between items-start">
+<span class="text-label-sm font-bold bg-primary/10 text-primary/80 px-2 py-0.5 rounded uppercase">خطر منخفض (32)</span>
+<span class="text-label-sm text-on-surface-variant">منذ 45د</span>
+</div>
+<p class="text-body-md font-bold text-on-surface">تحذير حد API</p>
+<p class="text-body-sm text-on-surface-variant">بوابة محافظة عدن تقدم طلبات تسجيل مفرطة.</p>
+</div>
+</div>
+</div>
+<!-- BOTTOM ROW: Live Feed & System Logs -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container rounded-xl border border-outline-variant h-[400px] flex flex-col">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h2 class="text-headline-sm font-headline-sm flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">database</span> تيار المعاملات المباشر
+                        </h2>
+<div class="flex gap-xs">
+<button class="p-1.5 rounded-lg bg-surface-container-high border border-outline-variant"><span class="material-symbols-outlined text-[18px]">filter_list</span></button>
+<button class="p-1.5 rounded-lg bg-surface-container-high border border-outline-variant"><span class="material-symbols-outlined text-[18px]">download</span></button>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto terminal-scroll">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high/50 sticky top-0">
+<tr>
+<th class="p-md text-label-sm font-bold text-on-surface-variant uppercase">النوع</th>
+<th class="p-md text-label-sm font-bold text-on-surface-variant uppercase">الموضوع</th>
+<th class="p-md text-label-sm font-bold text-on-surface-variant uppercase">المحافظة</th>
+<th class="p-md text-label-sm font-bold text-on-surface-variant uppercase">الوقت</th>
+<th class="p-md text-label-sm font-bold text-on-surface-variant uppercase">الحالة</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-md"><span class="material-symbols-outlined text-primary">home</span></td>
+<td class="p-md font-bold">قطعة سكنية 44-A</td>
+<td class="p-md">مدينة صنعاء</td>
+<td class="p-md text-body-sm">14:22:01</td>
+<td class="p-md"><span class="text-label-sm font-bold text-secondary flex items-center gap-1"><span class="w-1.5 h-1.5 bg-secondary rounded-full"></span> معتمد</span></td>
+</tr>
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-md"><span class="material-symbols-outlined text-primary">directions_car</span></td>
+<td class="p-md font-bold">نيسان باترول (2023)</td>
+<td class="p-md">مأرب</td>
+<td class="p-md text-body-sm">14:21:44</td>
+<td class="p-md"><span class="text-label-sm font-bold text-primary-fixed-dim flex items-center gap-1"><span class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full animate-pulse"></span> قيد الانتظار</span></td>
+</tr>
+<tr class="hover:bg-surface-variant/10 transition-colors bg-primary/5">
+<td class="p-md"><span class="material-symbols-outlined text-primary">apartment</span></td>
+<td class="p-md font-bold">الكتلة التجارية B</td>
+<td class="p-md">عدن</td>
+<td class="p-md text-body-sm">14:21:12</td>
+<td class="p-md"><span class="text-label-sm font-bold text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> مُبلغ عنه</span></td>
+</tr>
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-md"><span class="material-symbols-outlined text-primary">home</span></td>
+<td class="p-md font-bold">فيلا ساحلية 02</td>
+<td class="p-md">المكلا</td>
+<td class="p-md text-body-sm">14:20:55</td>
+<td class="p-md"><span class="text-label-sm font-bold text-secondary flex items-center gap-1"><span class="w-1.5 h-1.5 bg-secondary rounded-full"></span> معتمد</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-5 bg-surface-container rounded-xl border border-outline-variant h-[400px] flex flex-col font-mono text-[11px]">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-high/50">
+<h2 class="text-headline-sm font-headline-sm flex items-center gap-md font-sans">
+<span class="material-symbols-outlined text-primary">terminal</span> سجلات تدقيق النظام
+                        </h2>
+<span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary border border-secondary/20">وقت التشغيل: 99.98%</span>
+</div>
+<div class="flex-1 overflow-y-auto terminal-scroll p-md bg-[#050505] space-y-1">
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:22:04]</span> <span class="text-secondary">INF:</span> NODE_VERIFY_SUCCESS (SAN_001)</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:21:58]</span> <span class="text-tertiary-fixed-dim">DB:</span> SYNCING_REPLICAS... (MARIB_STORAGE)</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:21:42]</span> <span class="text-primary font-bold">WRN:</span> ANOMALY_DETECTED (OBJ_ID: 9021-YE) - AUTO_FLAG_TRIGGERED</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:21:30]</span> <span class="text-secondary">INF:</span> SMART_ID_BATCH_PROCESS_COMPLETE (N=450)</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:21:15]</span> <span class="text-on-surface-variant">SYS:</span> ROTATING_ENCRYPTION_KEYS... SUCCESS</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:21:02]</span> <span class="text-secondary">INF:</span> HEARTBEAT_ACK FROM ADEN_GW_02</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:20:45]</span> <span class="text-on-surface-variant">SYS:</span> CLEANING_TEMPORARY_BUFFER... DONE</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:20:33]</span> <span class="text-primary">ERR:</span> TIMEOUT_RETRY_FAILED (IBB_POST)</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:20:12]</span> <span class="text-secondary">INF:</span> NEW_PEER_CONNECTED: TA_882_EXT</div>
+<div class="flex gap-md"><span class="text-on-surface-variant whitespace-nowrap">[14:19:58]</span> <span class="text-secondary">INF:</span> AUTH_SUCCESS (UID: AHMED_M_ADMIN)</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Navigation (Visible only on small screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest border-t border-outline-variant rounded-t-xl shadow-[0_-4px_15px_rgba(0,0,0,0.2)]">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1.5 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm">الرئيسية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="text-label-sm font-label-sm">التغذية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined">warning</span>
+<span class="text-label-sm font-label-sm">التنبيهات</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">الإعدادات</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction: Update time in header
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            // Could add a clock element here if needed
+        }
+        setInterval(updateClock, 1000);
+
+        // Terminal text typing effect (simplified)
+        const logContainer = document.querySelector('.terminal-scroll.bg-\\[\\#050505\\]');
+        setInterval(() => {
+            const lastLog = logContainer.firstElementChild;
+            const newLog = lastLog.cloneNode(true);
+            const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            newLog.querySelector('.text-on-surface-variant').textContent = `[${time}]`;
+            logContainer.prepend(newLog);
+            if (logContainer.children.length > 30) {
+                logContainer.lastElementChild.remove();
+            }
+        }, 3000);
+    </script>
+</body></html>
