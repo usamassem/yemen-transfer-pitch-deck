@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يمن ترانسفير — العرض التقديمي</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #F4F6F9;
+  --bg-gradient: linear-gradient(180deg, #F9FBFC 0%, #EBEFF5 100%);
+  --primary: #8A2B1A; /* Terracotta / Burnt Red from image */
+  --primary-glow: rgba(138, 43, 26, 0.08);
+  --emerald: #1E6B4B; /* Deep Green from image verified badges */
+  --emerald-light: #E8F5E9;
+  --rose: #C62828;
+  --rose-light: #FFEBEE;
+  --slate-900: #1E293B;
+  --text-main: #2D3748;
+  --text-muted: #718096;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(148, 163, 184, 0.12);
+  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-base);
+  background-image: var(--bg-gradient);
+  color: var(--text-main);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Background Cityscape Outline from image footer */
+.city-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  opacity: 0.05;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,90 L30,90 L30,70 L50,70 L50,90 L80,90 L80,50 L110,50 L110,90 L140,90 L140,40 L160,20 L180,40 L180,90 L220,90 L220,60 L260,60 L260,90 L300,90 L300,30 L320,10 L340,30 L340,90 L400,90 L400,70 L440,70 L440,90 L500,90 L500,45 L530,45 L530,90 L580,90 L580,20 L600,0 L620,20 L620,90 L680,90 L680,60 L720,60 L720,90 L780,90 L780,40 L810,40 L810,90 L860,90 L860,50 L900,50 L900,90 L950,90 L950,20 L970,5 L990,20 L990,90 L1050,90 L1050,70 L1100,70 L1100,90 L1200,90 L1200,120 Z" fill="%238A2B1A"/></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Socotra Dragon Tree Watermark Accent Background */
+.dragon-tree-bg {
+  position: absolute;
+  right: -5%;
+  bottom: 5%;
+  width: 45vw;
+  height: 45vw;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slides-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; position:relative; z-index: 1; }
+.slides-track { display:flex; flex-direction:column; width:100%; height:100%; transition:transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); will-change:transform; }
+.slide { min-height:100vh; width:100%; flex-shrink:0; display:flex; flex-direction:column; justify-content:center; padding:40px 80px; position:relative; }
+
+/* Navigation */
+.nav-bar {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:16px;
+  background: rgba(255, 255, 255, 0.85); backdrop-filter:blur(20px);
+  padding:10px 24px; border-radius:50px; z-index:1000;
+  border:1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.nav-dots { display:flex; gap:8px; align-items:center; }
+.nav-dot { width:8px; height:8px; border-radius:50%; background:rgba(0,0,0,0.15); transition:all 0.4s cubic-bezier(0.22, 1, 0.36, 1); cursor:pointer; border:none; padding:0; }
+.nav-dot.active { background:var(--primary); width:28px; border-radius:4px; }
+.nav-arrow { background:rgba(0,0,0,0.03); border:1px solid var(--card-border); color:var(--text-main); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.nav-arrow:hover { background:var(--primary-glow); border-color:var(--primary); color:var(--primary); }
+#slideCounter { color:var(--text-muted); font-size:12px; font-weight:700; min-width:44px; text-align:center; letter-spacing: 1px;}
+
+/* Animations */
+.slide-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.slide.active .slide-in { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.float { animation:float 4s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+
+/* Typography */
+h1 { font-size:52px; font-weight:700; line-height:1.15; letter-spacing:-0.02em; color: var(--slate-900); }
+h2 { font-size:38px; font-weight:700; line-height:1.2; letter-spacing:-0.01em; color: var(--slate-900); }
+h3 { font-size:22px; font-weight:700; margin-bottom: 12px; color: var(--slate-900); }
+.gradient-text { color: var(--primary); }
+.subtitle { font-size:18px; font-weight:500; color: var(--text-muted); line-height: 1.6; }
+.body { font-size:15px; line-height:1.6; color: var(--text-muted); }
+
+.tag { display:inline-flex; align-items: center; gap: 6px; padding:6px 16px; border-radius:30px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom: 16px; border: 1px solid var(--card-border); }
+.tag-gold { background: var(--primary-glow); color: var(--primary); border-color: rgba(138, 43, 26, 0.2); }
+.tag-error { background: var(--rose-light); color: var(--rose); border-color: rgba(198, 40, 40, 0.2); }
+.tag-emerald { background: var(--emerald-light); color: var(--emerald); border-color: rgba(30, 107, 75, 0.2); }
+
+/* Layouts & Cards */
+.container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; }
+
+.glass-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-premium); transition: transform 0.3s, box-shadow 0.3s; }
+.glass-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+
+.accent-line { width:60px; height:4px; background:var(--primary); border-radius:2px; margin: 24px 0; }
+.accent-line.error { background: var(--rose); }
+
+/* Watermark Background */
+.watermark-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('watermark-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+}
+
+/* Custom Elements */
+.feature-list { display: flex; flex-direction: column; gap: 20px; }
+.feature-item { display: flex; gap: 16px; align-items: flex-start; }
+.feature-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--primary-glow); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; font-weight: bold; }
+.feature-text h4 { font-size: 16px; font-weight: 700; color: var(--slate-900); margin-bottom: 4px; }
+.feature-text p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+.step-number { width:40px; height:40px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; margin: 0 auto 16px; }
+
+.mockup-img { height:80vh; max-height:750px; width:auto; max-width:100%; border-radius:24px; box-shadow: 0 30px 70px rgba(0,0,0,0.12); border: 4px solid #fff; }
+
+/* Charts */
+.bar-chart { display:flex; flex-direction:column; gap:20px; }
+.bar-row { display:flex; align-items:center; gap:16px; }
+.bar-label { width:120px; font-size:14px; font-weight:700; color: var(--text-muted); }
+.bar-track { flex: 1; height: 14px; background: #E2E8F0; border-radius: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 8px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); width: 0; }
+.bar-value { width: 60px; font-weight: 700; font-size: 16px; text-align: left; color: var(--slate-900); }
+
+/* Government Hub Styles */
+.dash-panel { background: #FFFFFF; border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-premium); }
+.dash-header { padding: 16px 20px; background: #F8FAFC; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
+.dash-title { font-size: 13px; font-weight: 700; color: var(--slate-900); display: flex; align-items: center; gap: 8px; letter-spacing: 0.02em; }
+.dash-stat-box { background: #F8FAFC; border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; }
+.stat-val { font-size: 32px; font-weight: 700; color: var(--slate-900); margin-top: 4px; }
+.moi-table { width:100%; border-collapse:collapse; font-size: 13px; }
+.moi-table th { text-align:right; padding:12px 16px; font-weight:700; color:var(--text-muted); border-bottom:1px solid var(--card-border); text-transform: uppercase; font-size: 11px; }
+.moi-table td { padding:14px 16px; border-bottom:1px solid rgba(0,0,0,0.02); color: var(--text-main); }
+.status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+@media (max-width:1024px) {
+  .slide { padding:40px 32px; }
+  h1 { font-size:38px; }
+  h2 { font-size:30px; }
+  .grid-3, .grid-2 { grid-template-columns:1fr; gap: 20px;}
+  .mockup-img { height: 50vh; max-height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<div class="watermark-bg"></div>
+
+<div class="city-footer"></div>
+
+<!-- Reusable Dragon Blood Tree SVG Definition Macro -->
+<svg class="dragon-tree-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M46 95 h8 v-25 sub Q50 60 42 52 Q35 45 30 35 Q40 32 50 32 Q60 32 70 35 Q65 45 58 52 Q50 60 54 70 z" fill="#8A2B1A"/>
+  <path d="M15 32 C 10 24, 25 12, 50 12 C 75 12, 90 24, 85 32 C 75 36, 25 36, 15 32 Z" fill="#8A2B1A"/>
+  <path d="M25 28 C 20 22, 35 16, 50 16 C 65 16, 80 22, 75 28 Z" fill="#721C0F"/>
+</svg>
+
+<div class="slides-wrapper">
+  <div class="slides-track" id="track">
+
+    <!-- ═══ 1: TITLE ═══ -->
+    <section class="slide" data-index="0">
+      <div class="container grid-2" style="align-items:center; height:100%;">
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">verified</span> البوابة الرسمية لوزارة الداخلية</span>
+          <h1>يمن ترانسفير</h1>
+          <h1 class="gradient-text">تبادل الممتلكات الرقمية الآمن</h1>
+          <div class="accent-line"></div>
+          <p class="subtitle">ثورة في نقل ملكية المركبات والأراضي عبر المطابقة البيومترية والتحقق الثابت من المستندات.</p>
+
+          <div style="margin-top: 32px; display: inline-flex; align-items: center; gap: 12px; background: #fff; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--card-border); box-shadow: var(--shadow-premium);">
+            <span class="material-symbols-outlined" style="color:var(--emerald); font-size: 28px;">gpp_good</span>
+            <div>
+              <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">مؤمن ومراقب من قبل</p>
+              <p style="font-size:15px; font-weight:700; color:var(--slate-900);">وزارة الداخلية</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-in delay-2" style="text-align:left">
+          <img src="screens/stitch_screen_splitter_utility/login_create_account_frameless/screen.png" alt="تسجيل الدخول" class="float mockup-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2: PROBLEM ═══ -->
+    <section class="slide" data-index="1">
+      <div class="container">
+        <div class="slide-in">
+          <span class="tag tag-error"><span class="material-symbols-outlined" style="font-size:16px;">warning</span> التحدي</span>
+          <h2>الاحتكاك والاحتيال وتشتت الرقابة</h2>
+          <div class="accent-line error"></div>
+        </div>
+        <div class="grid-2 slide-in delay-1" style="margin-top:40px;">
+          <div class="glass-card">
+            <h3 style="color: var(--rose);">ثغرات التحقق</h3>
+            <p class="body" style="margin-bottom: 24px;">مخاطر عالية ناتجة عن المستندات المزورة واللوحات المكررة وانتحال الهوية في المعالجة اليدوية.</p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">📄</div>
+                <div class="feature-text"><h4>المستندات المزورة</h4><p>يمكن تزوير أو نسخ سندات الملكية الورقية والكوشان بسهولة.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">⏳</div>
+                <div class="feature-text"><h4>التأخير الإداري</h4><p>تتطلب عمليات النقل أسابيع من السفر وزيارات متكررة للمكاتب الإقليمية.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card">
+            <h3 style="color: var(--rose);">فجوة التتبع</h3>
+            <p class="body" style="margin-bottom: 24px;">تفتقر السلطات إلى نظام مركزي لمراقبة سرعة الممتلكات عالية القيمة وتغييرات الملكية في الوقت الفعلي.</p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">🗄️</div>
+                <div class="feature-text"><h4>قواعد بيانات منعزلة</h4><p>السجلات الإقليمية المتباينة تمنع وجود رؤية موحدة للملكية الوطنية.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">❓</div>
+                <div class="feature-text"><h4>التدخل المتأخر</h4><p>عدم القدرة على الإبلاغ عن التحويلات المتعددة المشبوهة أو السريعة للأصول الفردية.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3: SOLUTION ═══ -->
+    <section class="slide" data-index="2">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in delay-1" style="text-align:right">
+          <img src="screens/stitch_screen_splitter_utility/user_dashboard/screen.png" alt="لوحة التحكم" class="mockup-img">
+        </div>
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">gavel</span> التنظيم</span>
+          <h2>نظام موحد ومقاوم للتلاعب</h2>
+          <div class="accent-line"></div>
+          <div class="feature-list" style="margin-top: 32px;">
+            <div class="feature-item">
+              <div class="feature-icon">🚗</div>
+              <div class="feature-text"><h4>إطار الأصول المزدوجة</h4><p>منصة محمولة واحدة صُممت خصيصًا للبيئة اليمنية لإدارة كل من المركبات والعقارات.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🆔</div>
+              <div class="feature-text"><h4>الهوية أولاً</h4><p>كل حساب مرتبط تشفيرياً ببيانات اعتماد موثقة حكومياً وبيانات القياسات الحيوية وسجلات الاتصالات الرسمية.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🏛️</div>
+              <div class="feature-text"><h4>التوافق المؤسسي</h4><p>مُصمم منذ اليوم الأول ليعمل كبوابة رقمية خارجية متكاملة لسجلات الأملاك الحكومية.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4: VERIFICATION ═══ -->
+    <section class="slide" data-index="3">
+      <div class="container">
+        <div class="slide-in" style="text-align:center;">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">lock</span> بروتوكول الأمان</span>
+          <h2>التحقق متعدد العوامل للأصول والمستخدمين</h2>
+          <div class="accent-line" style="margin: 20px auto 40px;"></div>
+        </div>
+        <div class="grid-3 slide-in delay-1">
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">1</div>
+            <h3>المستندات القانونية</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">مسح ضوئي داخل التطبيق وتحليل OCR آلي لسجلات تسجيل المركبات الرسمية أو سندات الملكية.</p>
+            <img src="screens/stitch_screen_splitter_utility/vehicle_transfer_steps/screen.png" alt="المستندات" style="width:100%; max-height:50vh; object-fit:contain; border-radius:12px; border: 1px solid var(--card-border);">
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">2</div>
+            <h3>التقاط الأصل الحي</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">تصوير إلزامي فوري بزاوية 360 درجة للمركبات الفعلية أو إحداثيات الأرض لإثبات الوجود.</p>
+            <img src="screens/stitch_screen_splitter_utility/live_identity_verification/screen.png" alt="التقاط" style="width:100%; max-height:50vh; object-fit:contain; border-radius:12px; border: 1px solid var(--card-border);">
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">3</div>
+            <h3>المطابقة البيومترية</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">فحوصات مقاومة للتزوير تطابق المتداول مباشرة مع سجلات هويته الحكومية.</p>
+            <div style="height:180px; display:flex; align-items:center; justify-content:center;">
+              <div style="width:110px; height:110px; border-radius:50%; background:var(--emerald-light); color:var(--emerald); display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 20px rgba(30,107,75,0.1);"><span class="material-symbols-outlined" style="font-size:44px;">person_pin_circle</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5: MOI TERMINAL ═══ -->
+    <section class="slide" data-index="4">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">admin_panel_settings</span> مركز القيادة</span>
+          <h2>الرؤية المطلقة والسيادة</h2>
+          <div class="accent-line"></div>
+          <p class="subtitle" style="margin-bottom: 32px;">محطة مكتبية مخصصة تمنح وزارة الداخلية إشرافاً غير مسبوق في الوقت الفعلي.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon">📡</div>
+              <div class="feature-text"><h4>سجل تدقيق فوري</h4><p>شفافية كاملة للسلطات الحكومية بشأن كل معاملة على مستوى الدولة، مع تحديث فوري.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🚨</div>
+              <div class="feature-text"><h4>تخفيف التهديدات الاستباقي</h4><p>إبلاغ آلي عن أنماط التداول غير المعتادة أو الإحداثيات المتنازع عليها.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Civil Services Style Terminal -->
+        <div class="slide-in delay-2 dash-panel" style="height: 58vh;">
+          <div class="dash-header">
+            <span class="dash-title"><span class="material-symbols-outlined" style="color:var(--primary);">shield</span> لوحة تحكم وزارة الداخلية</span>
+            <span class="status-badge" style="background: var(--emerald-light); color: var(--emerald);"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">fiber_manual_record</span> القطاع متصل</span>
+          </div>
+          <div style="padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #FAFBFD;">
+            <div class="dash-stat-box">
+              <div style="color:var(--text-muted); font-size:11px; font-weight:700;">ملخص المعاملات اليومية</div>
+              <div class="stat-val">14,210</div>
+            </div>
+            <div class="dash-stat-box" style="border-right: 4px solid var(--primary);">
+              <div style="color:var(--primary); font-size:11px; font-weight:700;">المعاملات المُبلغ عنها</div>
+              <div class="stat-val" style="color:var(--primary);">12</div>
+            </div>
+          </div>
+          <div style="flex:1; overflow:hidden; display:flex; flex-direction:column; padding: 8px 16px;">
+            <table class="moi-table">
+              <thead><tr><th>نوع الأصل</th><th>المنطقة</th><th>الحالة</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>أرض سكنية</b></td>
+                  <td>قطاع صنعاء</td>
+                  <td><span class="status-badge" style="background: var(--emerald-light); color: var(--emerald);">موثقة</span></td>
+                </tr>
+                <tr>
+                  <td><b>تويوتا لاند كروزر</b></td>
+                  <td>ميناء عدن</td>
+                  <td><span class="status-badge" style="background: #FFF3E0; color: #E65100;">قيد الانتظار</span></td>
+                </tr>
+                <tr>
+                  <td><b>كتلة تجارية</b></td>
+                  <td>مديرية تعز</td>
+                  <td><span class="status-badge" style="background: var(--rose-light); color: var(--rose);">متنازع عليها</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6: MARKET ═══ -->
+    <section class="slide" data-index="5">
+      <div class="container grid-2">
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> الجدوى</span>
+          <h2>الاستدامة المالية</h2>
+          <div class="accent-line"></div>
+          <p class="subtitle" style="margin-bottom: 40px;">نموذج مستدام يخفض التكاليف الإدارية بشكل كبير مع الاستفادة من أسواق الأصول المحلية عالية السرعة.</p>
+
+          <div class="glass-card">
+            <h3>مقارنة تكلفة المعالجة</h3>
+            <div class="bar-chart" style="margin-top: 24px;">
+              <div class="bar-row">
+                <span class="bar-label">تقليدي</span>
+                <div class="bar-track"><div class="bar-fill" style="background: #CBD5E1;" data-width="85%"></div></div>
+                <span class="bar-value">$85</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label" style="color:var(--primary);">يمن ترانسفير</span>
+                <div class="bar-track"><div class="bar-fill" style="background: var(--primary);" data-width="14%"></div></div>
+                <span class="bar-value" style="color:var(--primary);">$12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-in delay-2">
+          <div class="glass-card" style="height: 100%;">
+            <h3>هيكل الإيرادات</h3>
+            <div class="feature-list" style="margin-top: 24px;">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--emerald-light); color:var(--emerald);">✓</div>
+                <div class="feature-text"><h4>رسوم المعاملات الصغيرة</h4><p>2–5 دولار تُفرض على كل عملية تحويل ناجحة وموثقة.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--emerald-light); color:var(--emerald);">✓</div>
+                <div class="feature-text"><h4>ترخيص التكامل الحكومي</h4><p>ترخيص مؤسسي سنوي للوصول إلى البنية التحتية الخلفية للوزارة.</p></div>
+              </div>
+            </div>
+            <div style="margin-top: 40px; padding: 20px; background: var(--primary-glow); border: 1px dashed var(--primary); border-radius: 12px; text-align: center;">
+              <p style="font-size:18px; font-weight:700; color:var(--primary);">الإيرادات السنوية المتوقعة العام الثاني: $1.2M</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 7: VISION ═══ -->
+    <section class="slide" data-index="6">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in delay-1" style="text-align:right">
+           <img src="screens/stitch_screen_splitter_utility/confirmation_screen/screen.png" alt="نجاح" class="float mockup-img">
+        </div>
+        <div class="slide-in">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">flag</span> الطريق السيادي</span>
+          <h2>تشكيل التبادل الآمن</h2>
+          <div class="accent-line"></div>
+          <p class="body" style="font-size:16px; margin-bottom:32px;">فرصة تكنولوجية نادرة حيث يعزز التوسع التشغيلي الأمن القومي والكفاءة المدنية وسيادة المستندات بشكل مباشر.</p>
+          <a href="mailto:founder@yemen-transfer.com" style="display:inline-block; padding: 16px 32px; background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; border-radius: 12px; font-size: 15px; box-shadow: 0 10px 20px var(--primary-glow);">ابدأ بوابة الشراكة</a>
+          <p style="margin-top: 32px; font-size: 12px; color: var(--text-muted);">يمن ترانسفير © 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8: PROTOTYPE ═══ -->
+    <section class="slide" data-index="7" style="align-items:center;">
+      <div class="slide-in">
+        <h2 style="text-align:center; margin-bottom: 30px;">معاينة تفاعلية للنظام</h2>
+        <div style="width:375px; height:740px; border-radius:40px; overflow:hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.15); border: 10px solid #FFFFFF; background: #F8FAFC;">
+          <iframe src="yemen_transfer_secure_asset_exchange.html" style="width:100%; height:100%; border:none;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9: WATCHTOWER ═══ -->
+    <section class="slide" data-index="8" style="padding:0;">
+      <iframe src="stitch_screen_splitter_utility/the_watchtower_moi_terminal_dashboard/code.html" style="width:100%; height:100vh; border:none;"></iframe>
+    </section>
+
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nav-arrow" id="prevBtn"><span class="material-symbols-outlined">chevron_right</span></button>
+  <div class="nav-dots" id="dotsContainer"></div>
+  <button class="nav-arrow" id="nextBtn"><span class="material-symbols-outlined">chevron_left</span></button>
+  <span id="slideCounter"></span>
+</div>
+
+<script>
+const track = document.getElementById('track');
+const slides = track.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dotsContainer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('slideCounter');
+let current = 0;
+const total = slides.length;
+
+for(let i=0; i<total; i++) {
+  const d = document.createElement('button');
+  d.className = 'nav-dot' + (i===0 ? ' active' : '');
+  d.dataset.index = i;
+  d.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(d);
+}
+
+function animateBars(slideIndex) {
+  const slide = slides[slideIndex];
+  const fills = slide.querySelectorAll('.bar-fill');
+  fills.forEach(fill => { fill.style.width = fill.getAttribute('data-width'); });
+}
+
+function resetBars(slideIndex) {
+  const slide = slides[slideIndex];
+  const fills = slide.querySelectorAll('.bar-fill');
+  fills.forEach(fill => { fill.style.width = '0'; });
+}
+
+function goTo(i) {
+  if(i < 0) i = 0;
+  if(i >= total) i = total - 1;
+
+  slides[current].classList.remove('active');
+  resetBars(current);
+
+  current = i;
+  track.style.transform = `translateY(-${current * 100}vh)`;
+
+  slides[current].classList.add('active');
+  setTimeout(() => animateBars(current), 400);
+
+  document.querySelectorAll('.nav-dot').forEach((d, j) => d.classList.toggle('active', j === current));
+  counter.textContent = `${current + 1} / ${total}`;
+}
+
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+  if(e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+});
+
+let ticking = false;
+document.addEventListener('wheel', e => {
+  if(ticking) return;
+  ticking = true;
+  setTimeout(() => ticking = false, 1000);
+  e.deltaY > 0 ? goTo(current + 1) : goTo(current - 1);
+});
+
+let ts = 0;
+document.addEventListener('touchstart', e => { ts = e.touches[0].clientY; }, {passive: true});
+document.addEventListener('touchend', e => {
+  const d = ts - e.changedTouches[0].clientY;
+  if(Math.abs(d) > 50) { d > 0 ? goTo(current + 1) : goTo(current - 1); }
+}, {passive: true});
+
+goTo(0);
+</script>
+</body>
+</html>

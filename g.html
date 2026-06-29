@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yemen Transfer — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #F4F6F9;
+  --bg-gradient: linear-gradient(180deg, #F9FBFC 0%, #EBEFF5 100%);
+  --primary: #8A2B1A; /* Terracotta / Burnt Red from image */
+  --primary-glow: rgba(138, 43, 26, 0.08);
+  --emerald: #1E6B4B; /* Deep Green from image verified badges */
+  --emerald-light: #E8F5E9;
+  --rose: #C62828;
+  --rose-light: #FFEBEE;
+  --slate-900: #1E293B;
+  --text-main: #2D3748;
+  --text-muted: #718096;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(148, 163, 184, 0.12);
+  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-base);
+  background-image: var(--bg-gradient);
+  color: var(--text-main);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Background Cityscape Outline from image footer */
+.city-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  opacity: 0.05;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,90 L30,90 L30,70 L50,70 L50,90 L80,90 L80,50 L110,50 L110,90 L140,90 L140,40 L160,20 L180,40 L180,90 L220,90 L220,60 L260,60 L260,90 L300,90 L300,30 L320,10 L340,30 L340,90 L400,90 L400,70 L440,70 L440,90 L500,90 L500,45 L530,45 L530,90 L580,90 L580,20 L600,0 L620,20 L620,90 L680,90 L680,60 L720,60 L720,90 L780,90 L780,40 L810,40 L810,90 L860,90 L860,50 L900,50 L900,90 L950,90 L950,20 L970,5 L990,20 L990,90 L1050,90 L1050,70 L1100,70 L1100,90 L1200,90 L1200,120 Z" fill="%238A2B1A"/></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Socotra Dragon Tree Watermark Accent Background */
+.dragon-tree-bg {
+  position: absolute;
+  right: -5%;
+  bottom: 5%;
+  width: 45vw;
+  height: 45vw;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slides-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; position:relative; z-index: 1; }
+.slides-track { display:flex; flex-direction:column; width:100%; height:100%; transition:transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); will-change:transform; }
+.slide { min-height:100vh; width:100%; flex-shrink:0; display:flex; flex-direction:column; justify-content:center; padding:40px 80px; position:relative; }
+
+/* Navigation */
+.nav-bar {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:16px;
+  background: rgba(255, 255, 255, 0.85); backdrop-filter:blur(20px);
+  padding:10px 24px; border-radius:50px; z-index:1000;
+  border:1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.nav-dots { display:flex; gap:8px; align-items:center; }
+.nav-dot { width:8px; height:8px; border-radius:50%; background:rgba(0,0,0,0.15); transition:all 0.4s cubic-bezier(0.22, 1, 0.36, 1); cursor:pointer; border:none; padding:0; }
+.nav-dot.active { background:var(--primary); width:28px; border-radius:4px; }
+.nav-arrow { background:rgba(0,0,0,0.03); border:1px solid var(--card-border); color:var(--text-main); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.nav-arrow:hover { background:var(--primary-glow); border-color:var(--primary); color:var(--primary); }
+#slideCounter { color:var(--text-muted); font-size:12px; font-weight:700; min-width:44px; text-align:center; letter-spacing: 1px;}
+
+/* Animations */
+.slide-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.slide.active .slide-in { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.float { animation:float 4s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+
+/* Typography */
+h1 { font-size:52px; font-weight:700; line-height:1.15; letter-spacing:-0.02em; color: var(--slate-900); }
+h2 { font-size:38px; font-weight:700; line-height:1.2; letter-spacing:-0.01em; color: var(--slate-900); }
+h3 { font-size:22px; font-weight:700; margin-bottom: 12px; color: var(--slate-900); }
+.gradient-text { color: var(--primary); }
+.subtitle { font-size:18px; font-weight:500; color: var(--text-muted); line-height: 1.6; }
+.body { font-size:15px; line-height:1.6; color: var(--text-muted); }
+
+.tag { display:inline-flex; align-items: center; gap: 6px; padding:6px 16px; border-radius:30px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom: 16px; border: 1px solid var(--card-border); }
+.tag-gold { background: var(--primary-glow); color: var(--primary); border-color: rgba(138, 43, 26, 0.2); }
+.tag-error { background: var(--rose-light); color: var(--rose); border-color: rgba(198, 40, 40, 0.2); }
+.tag-emerald { background: var(--emerald-light); color: var(--emerald); border-color: rgba(30, 107, 75, 0.2); }
+
+/* Layouts & Cards */
+.container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; }
+
+.glass-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-premium); transition: transform 0.3s, box-shadow 0.3s; }
+.glass-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+
+.accent-line { width:60px; height:4px; background:var(--primary); border-radius:2px; margin: 24px 0; }
+.accent-line.error { background: var(--rose); }
+
+/* Watermark Background */
+.watermark-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('watermark-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+}
+
+/* Custom Elements */
+.feature-list { display: flex; flex-direction: column; gap: 20px; }
+.feature-item { display: flex; gap: 16px; align-items: flex-start; }
+.feature-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--primary-glow); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; font-weight: bold; }
+.feature-text h4 { font-size: 16px; font-weight: 700; color: var(--slate-900); margin-bottom: 4px; }
+.feature-text p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+.step-number { width:40px; height:40px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; margin: 0 auto 16px; }
+
+.mockup-img { height:80vh; max-height:750px; width:auto; max-width:100%; border-radius:24px; box-shadow: 0 30px 70px rgba(0,0,0,0.12); border: 4px solid #fff; }
+
+/* Charts */
+.bar-chart { display:flex; flex-direction:column; gap:20px; }
+.bar-row { display:flex; align-items:center; gap:16px; }
+.bar-label { width:120px; font-size:14px; font-weight:700; color: var(--text-muted); }
+.bar-track { flex: 1; height: 14px; background: #E2E8F0; border-radius: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 8px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); width: 0; }
+.bar-value { width: 60px; font-weight: 700; font-size: 16px; text-align: right; color: var(--slate-900); }
+
+/* Government Hub Styles */
+.dash-panel { background: #FFFFFF; border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-premium); }
+.dash-header { padding: 16px 20px; background: #F8FAFC; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
+.dash-title { font-size: 13px; font-weight: 700; color: var(--slate-900); display: flex; align-items: center; gap: 8px; letter-spacing: 0.02em; }
+.dash-stat-box { background: #F8FAFC; border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; }
+.stat-val { font-size: 32px; font-weight: 700; color: var(--slate-900); margin-top: 4px; }
+.moi-table { width:100%; border-collapse:collapse; font-size: 13px; }
+.moi-table th { text-align:left; padding:12px 16px; font-weight:700; color:var(--text-muted); border-bottom:1px solid var(--card-border); text-transform: uppercase; font-size: 11px; }
+.moi-table td { padding:14px 16px; border-bottom:1px solid rgba(0,0,0,0.02); color: var(--text-main); }
+.status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+@media (max-width:1024px) {
+  .slide { padding:40px 32px; }
+  h1 { font-size:38px; }
+  h2 { font-size:30px; }
+  .grid-3, .grid-2 { grid-template-columns:1fr; gap: 20px;}
+  .mockup-img { height: 50vh; max-height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<div class="watermark-bg"></div>
+
+<div class="city-footer"></div>
+
+<!-- Reusable Dragon Blood Tree SVG Definition Macro -->
+<svg class="dragon-tree-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M46 95 h8 v-25 sub Q50 60 42 52 Q35 45 30 35 Q40 32 50 32 Q60 32 70 35 Q65 45 58 52 Q50 60 54 70 z" fill="#8A2B1A"/>
+  <path d="M15 32 C 10 24, 25 12, 50 12 C 75 12, 90 24, 85 32 C 75 36, 25 36, 15 32 Z" fill="#8A2B1A"/>
+  <path d="M25 28 C 20 22, 35 16, 50 16 C 65 16, 80 22, 75 28 Z" fill="#721C0F"/>
+</svg>
+
+<div class="slides-wrapper">
+  <div class="slides-track" id="track">
+
+    <!-- ═══ 1: TITLE ═══ -->
+    <section class="slide" data-index="0">
+      <div class="container grid-2" style="align-items:center; height:100%;">
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">verified</span> MOI Official Gate</span>
+          <h1>Yemen Transfer</h1>
+          <h1 class="gradient-text">Secure Digital Property Exchange</h1>
+          <div class="accent-line"></div>
+          <p class="subtitle">Revolutionizing vehicle and land ownership transfers via biometric matching and immutable document verification.</p>
+
+          <div style="margin-top: 32px; display: inline-flex; align-items: center; gap: 12px; background: #fff; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--card-border); box-shadow: var(--shadow-premium);">
+            <span class="material-symbols-outlined" style="color:var(--emerald); font-size: 28px;">gpp_good</span>
+            <div>
+              <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Secured & Monitored By</p>
+              <p style="font-size:15px; font-weight:700; color:var(--slate-900);">Ministry of Interior</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-in delay-2" style="text-align:right">
+          <img src="screens/stitch_screen_splitter_utility/login_create_account_frameless/screen.png" alt="Login" class="float mockup-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2: PROBLEM ═══ -->
+    <section class="slide" data-index="1">
+      <div class="container">
+        <div class="slide-in">
+          <span class="tag tag-error"><span class="material-symbols-outlined" style="font-size:16px;">warning</span> The Challenge</span>
+          <h2>Friction, Fraud, and Fragmented Oversight</h2>
+          <div class="accent-line error"></div>
+        </div>
+        <div class="grid-2 slide-in delay-1" style="margin-top:40px;">
+          <div class="glass-card">
+            <h3 style="color: var(--rose);">Verification Vulnerabilities</h3>
+            <p class="body" style="margin-bottom: 24px;">High risks stemming from forged deeds, duplicate plates, and identity misrepresentation in manual processing.</p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">📄</div>
+                <div class="feature-text"><h4>Forged Documentation</h4><p>Paper-based deeds and Koushans are easily altered or replicated.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">⏳</div>
+                <div class="feature-text"><h4>Administrative Delays</h4><p>Transfers require weeks of travel and repetitive regional office visits.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card">
+            <h3 style="color: var(--rose);">The Tracking Gap</h3>
+            <p class="body" style="margin-bottom: 24px;">Authorities lack a centralized system to monitor high-value property velocity and ownership changes in real-time.</p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">🗄️</div>
+                <div class="feature-text"><h4>Siloed Databases</h4><p>Disparate regional records prevent a unified national ownership view.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--rose-light); color:var(--rose);">❓</div>
+                <div class="feature-text"><h4>Delayed Intervention</h4><p>Inability to flag suspicious or rapid multi-transfers of single assets.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3: SOLUTION ═══ -->
+    <section class="slide" data-index="2">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in delay-1" style="text-align:left">
+          <img src="screens/stitch_screen_splitter_utility/user_dashboard/screen.png" alt="Dashboard" class="mockup-img">
+        </div>
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">gavel</span> Regulation</span>
+          <h2>A Unified, Tamper-Proof Ecosystem</h2>
+          <div class="accent-line"></div>
+          <div class="feature-list" style="margin-top: 32px;">
+            <div class="feature-item">
+              <div class="feature-icon">🚗</div>
+              <div class="feature-text"><h4>Dual-Asset Framework</h4><p>A single mobile platform built specifically for the Yemeni landscape to handle both vehicles and real estate.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🆔</div>
+              <div class="feature-text"><h4>Identity First</h4><p>Every account is cryptographically tied to state-verified credentials, biometrics, and official telecoms records.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🏛️</div>
+              <div class="feature-text"><h4>Institutional Alignment</h4><p>Engineered from day one to operate seamlessly as an external digital gateway for state property registries.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4: VERIFICATION ═══ -->
+    <section class="slide" data-index="3">
+      <div class="container">
+        <div class="slide-in" style="text-align:center;">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">lock</span> Security Protocol</span>
+          <h2>Multi-Factor Asset & User Validation</h2>
+          <div class="accent-line" style="margin: 20px auto 40px;"></div>
+        </div>
+        <div class="grid-3 slide-in delay-1">
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">1</div>
+            <h3>Legal Documents</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">In-app scanning and automated OCR parsing of official vehicle registrations or property deeds.</p>
+            <img src="screens/stitch_screen_splitter_utility/vehicle_transfer_steps/screen.png" alt="Docs" style="width:100%; max-height:50vh; object-fit:contain; border-radius:12px; border: 1px solid var(--card-border);">
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">2</div>
+            <h3>Live Asset Capture</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">Mandatory, real-time 360° camera capture of physical vehicles or land coordinates to prove existence.</p>
+            <img src="screens/stitch_screen_splitter_utility/live_identity_verification/screen.png" alt="Capture" style="width:100%; max-height:50vh; object-fit:contain; border-radius:12px; border: 1px solid var(--card-border);">
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div class="step-number">3</div>
+            <h3>Biometric Match</h3>
+            <p class="body" style="font-size:14px; margin-bottom:16px;">Anti-spoofing facial liveness checks that match the trader directly against their government ID records.</p>
+            <div style="height:180px; display:flex; align-items:center; justify-content:center;">
+              <div style="width:110px; height:110px; border-radius:50%; background:var(--emerald-light); color:var(--emerald); display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 20px rgba(30,107,75,0.1);"><span class="material-symbols-outlined" style="font-size:44px;">person_pin_circle</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5: MOI TERMINAL ═══ -->
+    <section class="slide" data-index="4">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">admin_panel_settings</span> Command Center</span>
+          <h2>Absolute Visibility & Sovereignty</h2>
+          <div class="accent-line"></div>
+          <p class="subtitle" style="margin-bottom: 32px;">A dedicated desktop terminal empowering the Ministry of Interior with unprecedented, real-time oversight.</p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon">📡</div>
+              <div class="feature-text"><h4>Real-Time Audit Trail</h4><p>Complete transparency for state authorities on every transaction nationwide, updating instantly.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🚨</div>
+              <div class="feature-text"><h4>Proactive Threat Mitigation</h4><p>Automated flagging for anomalous trading frequencies or disputed coordinates.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Civil Services Style Terminal -->
+        <div class="slide-in delay-2 dash-panel" style="height: 58vh;">
+          <div class="dash-header">
+            <span class="dash-title"><span class="material-symbols-outlined" style="color:var(--primary);">shield</span> Ministry of Interior Dashboard</span>
+            <span class="status-badge" style="background: var(--emerald-light); color: var(--emerald);"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">fiber_manual_record</span> Sector Connected</span>
+          </div>
+          <div style="padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #FAFBFD;">
+            <div class="dash-stat-box">
+              <div style="color:var(--text-muted); font-size:11px; font-weight:700;">Daily Transaction Summary</div>
+              <div class="stat-val">14,210</div>
+            </div>
+            <div class="dash-stat-box" style="border-left: 4px solid var(--primary);">
+              <div style="color:var(--primary); font-size:11px; font-weight:700;">Flagged Transactions</div>
+              <div class="stat-val" style="color:var(--primary);">12</div>
+            </div>
+          </div>
+          <div style="flex:1; overflow:hidden; display:flex; flex-direction:column; padding: 8px 16px;">
+            <table class="moi-table">
+              <thead><tr><th>Asset Type</th><th>Region</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>Residential Land</b></td>
+                  <td>Sana'a Sector</td>
+                  <td><span class="status-badge" style="background: var(--emerald-light); color: var(--emerald);">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><b>Toyota Land Cruiser</b></td>
+                  <td>Aden Port</td>
+                  <td><span class="status-badge" style="background: #FFF3E0; color: #E65100;">Pending</span></td>
+                </tr>
+                <tr>
+                  <td><b>Commercial Block</b></td>
+                  <td>Taiz District</td>
+                  <td><span class="status-badge" style="background: var(--rose-light); color: var(--rose);">Disputed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6: MARKET ═══ -->
+    <section class="slide" data-index="5">
+      <div class="container grid-2">
+        <div class="slide-in">
+          <span class="tag tag-emerald"><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Viability</span>
+          <h2>Financial Sustainability</h2>
+          <div class="accent-line"></div>
+          <p class="subtitle" style="margin-bottom: 40px;">A self-sustaining model that drastically cuts administrative costs while tapping into high-velocity domestic asset markets.</p>
+
+          <div class="glass-card">
+            <h3>Processing Cost Comparison</h3>
+            <div class="bar-chart" style="margin-top: 24px;">
+              <div class="bar-row">
+                <span class="bar-label">Traditional</span>
+                <div class="bar-track"><div class="bar-fill" style="background: #CBD5E1;" data-width="85%"></div></div>
+                <span class="bar-value">$85</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label" style="color:var(--primary);">Yemen Transfer</span>
+                <div class="bar-track"><div class="bar-fill" style="background: var(--primary);" data-width="14%"></div></div>
+                <span class="bar-value" style="color:var(--primary);">$12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-in delay-2">
+          <div class="glass-card" style="height: 100%;">
+            <h3>Revenue Architecture</h3>
+            <div class="feature-list" style="margin-top: 24px;">
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--emerald-light); color:var(--emerald);">✓</div>
+                <div class="feature-text"><h4>Micro-Transaction Fee</h4><p>$2–$5 levied per successful, verified transfer pipeline.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon" style="background:var(--emerald-light); color:var(--emerald);">✓</div>
+                <div class="feature-text"><h4>Gov Integration License</h4><p>Annual institutional license for Ministry backend infrastructure access.</p></div>
+              </div>
+            </div>
+            <div style="margin-top: 40px; padding: 20px; background: var(--primary-glow); border: 1px dashed var(--primary); border-radius: 12px; text-align: center;">
+              <p style="font-size:18px; font-weight:700; color:var(--primary);">Projected Year 2 ARR: $1.2M</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 7: VISION ═══ -->
+    <section class="slide" data-index="6">
+      <div class="container grid-2" style="align-items:center;">
+        <div class="slide-in delay-1" style="text-align:left">
+           <img src="screens/stitch_screen_splitter_utility/confirmation_screen/screen.png" alt="Success" class="float mockup-img">
+        </div>
+        <div class="slide-in">
+          <span class="tag tag-gold"><span class="material-symbols-outlined" style="font-size:16px;">flag</span> Sovereign Road</span>
+          <h2>Shaping Secure Exchange</h2>
+          <div class="accent-line"></div>
+          <p class="body" style="font-size:16px; margin-bottom:32px;">A rare technological opportunity where operational scaling directly enhances national security, civic efficiency, and document sovereignty.</p>
+          <a href="mailto:founder@yemen-transfer.com" style="display:inline-block; padding: 16px 32px; background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; border-radius: 12px; font-size: 15px; box-shadow: 0 10px 20px var(--primary-glow);">Initiate Partnership Gateway</a>
+          <p style="margin-top: 32px; font-size: 12px; color: var(--text-muted);">Yemen Transfer © 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8: PROTOTYPE ═══ -->
+    <section class="slide" data-index="7" style="align-items:center;">
+      <div class="slide-in">
+        <h2 style="text-align:center; margin-bottom: 30px;">Interactive System Preview</h2>
+        <div style="width:375px; height:740px; border-radius:40px; overflow:hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.15); border: 10px solid #FFFFFF; background: #F8FAFC;">
+          <iframe src="yemen_transfer_secure_asset_exchange.html" style="width:100%; height:100%; border:none;"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9: WATCHTOWER ═══ -->
+    <section class="slide" data-index="8" style="padding:0;">
+      <iframe src="stitch_screen_splitter_utility/the_watchtower_moi_terminal_dashboard/code.html" style="width:100%; height:100vh; border:none;"></iframe>
+    </section>
+
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nav-arrow" id="prevBtn"><span class="material-symbols-outlined">chevron_left</span></button>
+  <div class="nav-dots" id="dotsContainer"></div>
+  <button class="nav-arrow" id="nextBtn"><span class="material-symbols-outlined">chevron_right</span></button>
+  <span id="slideCounter"></span>
+</div>
+
+<script>
+const track = document.getElementById('track');
+const slides = track.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dotsContainer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('slideCounter');
+let current = 0;
+const total = slides.length;
+
+for(let i=0; i<total; i++) {
+  const d = document.createElement('button');
+  d.className = 'nav-dot' + (i===0 ? ' active' : '');
+  d.dataset.index = i;
+  d.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(d);
+}
+
+function animateBars(slideIndex) {
+  const slide = slides[slideIndex];
+  const fills = slide.querySelectorAll('.bar-fill');
+  fills.forEach(fill => { fill.style.width = fill.getAttribute('data-width'); });
+}
+
+function resetBars(slideIndex) {
+  const slide = slides[slideIndex];
+  const fills = slide.querySelectorAll('.bar-fill');
+  fills.forEach(fill => { fill.style.width = '0'; });
+}
+
+function goTo(i) {
+  if(i < 0) i = 0;
+  if(i >= total) i = total - 1;
+
+  slides[current].classList.remove('active');
+  resetBars(current);
+
+  current = i;
+  track.style.transform = `translateY(-${current * 100}vh)`;
+
+  slides[current].classList.add('active');
+  setTimeout(() => animateBars(current), 400);
+
+  document.querySelectorAll('.nav-dot').forEach((d, j) => d.classList.toggle('active', j === current));
+  counter.textContent = `${current + 1} / ${total}`;
+}
+
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+  if(e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+});
+
+let ticking = false;
+document.addEventListener('wheel', e => {
+  if(ticking) return;
+  ticking = true;
+  setTimeout(() => ticking = false, 1000);
+  e.deltaY > 0 ? goTo(current + 1) : goTo(current - 1);
+});
+
+let ts = 0;
+document.addEventListener('touchstart', e => { ts = e.touches[0].clientY; }, {passive: true});
+document.addEventListener('touchend', e => {
+  const d = ts - e.changedTouches[0].clientY;
+  if(Math.abs(d) > 50) { d > 0 ? goTo(current + 1) : goTo(current - 1); }
+}, {passive: true});
+
+goTo(0);
+</script>
+</body>
+</html>
