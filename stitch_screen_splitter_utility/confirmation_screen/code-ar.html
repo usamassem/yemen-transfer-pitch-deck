@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ar" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تم التحويل - يمن ترانسفير</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fcf9f8",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed": "#002204",
+                        "on-primary-fixed": "#410001",
+                        "primary-fixed": "#ffdad5",
+                        "on-primary-container": "#ffaca1",
+                        "surface-container-low": "#f6f3f2",
+                        "error": "#ba1a1a",
+                        "background": "#fcf9f8",
+                        "surface-variant": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4aa",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb4aa",
+                        "on-tertiary-fixed": "#191c1d",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#217128",
+                        "tertiary": "#36393a",
+                        "secondary-fixed-dim": "#88d982",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#ddc0bc",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-fixed-variant": "#005312",
+                        "secondary-container": "#a0f399",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#4d5051",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "secondary": "#1b6d24",
+                        "on-tertiary-container": "#c0c2c3",
+                        "tertiary-fixed": "#e1e3e4",
+                        "inverse-on-surface": "#f3f0ef",
+                        "secondary-fixed": "#a3f69c",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#89726e",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "primary-container": "#8c3027",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#6d1913",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "surface-tint": "#a03f34",
+                        "on-surface-variant": "#56423f",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed-variant": "#812820",
+                        "inverse-surface": "#303030",
+                        "surface-container": "#f0eded"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Be Vietnam Pro"],
+                        "label-lg": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .bg-grid {
+            background-image: radial-gradient(circle, #e5e2e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .animate-check {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: dash 0.8s ease-in-out forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Hide scrollbars */
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="bg-background dark:bg-background flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant/10 p-2 rounded-full transition-transform active:scale-95">
+                menu
+            </button>
+<h1 class="text-headline-sm font-headline-lg font-bold text-primary">يمن ترانسفير</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:bg-surface-variant/10 p-2 rounded-full transition-transform active:scale-95">
+                notifications
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 mt-16 pb-32 relative z-10 px-margin-mobile">
+<!-- Background Patterns -->
+<div class="fixed inset-0 bg-grid pointer-events-none opacity-40"></div>
+<!-- Success State Header -->
+<section class="flex flex-col items-center justify-center py-xl fade-in">
+<div class="relative mb-lg">
+<!-- Large Success Badge -->
+<div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center shadow-lg">
+<svg class="w-16 h-16 text-secondary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24">
+<polyline class="animate-check" points="20 6 9 17 4 12"></polyline>
+</svg>
+</div>
+<!-- Identity Confirmed Badge -->
+<div class="absolute -bottom-2 right-0 bg-white shadow-md border border-outline-variant px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">تم تأكيد الهوية</span>
+</div>
+</div>
+<div class="text-center space-y-xs">
+<h2 class="text-headline-lg font-headline-lg text-primary">تحويل ناجح</h2>
+<p class="text-headline-md font-headline-md text-on-surface-variant">Transfer Successful</p>
+</div>
+</section>
+<!-- Transaction Summary Card -->
+<div class="max-w-md mx-auto fade-in" style="animation-delay: 0.2s;">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-surface-container-highest overflow-hidden relative">
+<!-- Brand Watermark -->
+<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none p-xl">
+<img alt="Yemen Transfer Tree Emblem" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzqyGdKVUcTlKSEegoaV3RZ_xezOg9sd8B8ZpFLhxleA4wGF253hozo7mY3JbAcRpQZn2NCy5ZJjNvQ0KH-4S3Zzt8g1WVkySX7-Vm0ox8rFAXcxEr6Bgx9CeqXO5NnbuyXTSebGJ9EW-76t2BPNXZpkUAA57OtJ4cpt7ARcaGLuu5H32Z5ECVW_tilYdqhoTS4D0UDNyf2ERKCShlLP5Ts6F6CQ7CENeMKy3P23px2sUufkUNhaqM5qaa3PDlAuLjiPA"/>
+</div>
+<div class="relative p-lg z-10">
+<div class="flex justify-between items-center mb-md border-b border-surface-container-highest pb-md">
+<span class="text-label-lg font-label-lg text-on-surface-variant uppercase tracking-wider">تفاصيل المعاملة</span>
+<span class="flex items-center gap-1 bg-secondary-container/30 text-on-secondary-container px-2 py-1 rounded-full text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            تم التحقق
+                        </span>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between">
+<span class="text-body-md text-on-surface-variant">نوع الأصل</span>
+<span class="font-semibold text-on-surface">ملكية مركبة</span>
+</div>
+<div class="flex justify-between">
+<span class="text-body-md text-on-surface-variant">رقم المعاملة</span>
+<span class="font-mono text-body-md text-on-surface">#YT-8829-X81</span>
+</div>
+<div class="flex justify-between">
+<span class="text-body-md text-on-surface-variant">التاريخ</span>
+<span class="text-on-surface">Oct 24, 2023 | 14:32</span>
+</div>
+<div class="flex justify-between">
+<span class="text-body-md text-on-surface-variant">المرجع</span>
+<span class="text-on-surface">أحمد منصور</span>
+</div>
+</div>
+<div class="mt-xl p-md bg-surface-container-low rounded-lg flex items-center gap-md border border-outline-variant/30">
+<div class="bg-white p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">الحالة الأمنية</p>
+<p class="text-body-sm text-on-surface-variant">مؤمن من قبل وزارة الداخلية</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-xl space-y-md pb-xl">
+<button class="w-full bg-primary-container text-white py-4 rounded-xl font-headline-sm flex items-center justify-center gap-md shadow-lg active:scale-95 transition-all">
+<span>العودة إلى لوحة التحكم</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-xs border border-outline-variant text-on-surface-variant py-3 rounded-xl font-label-lg hover:bg-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>الإيصال</span>
+</button>
+<button class="flex items-center justify-center gap-xs border border-outline-variant text-on-surface-variant py-3 rounded-xl font-label-lg hover:bg-surface-variant/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>النشاط</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- City Silhouette Footer -->
+<div class="fixed bottom-16 left-0 w-full h-24 pointer-events-none z-0 opacity-20 overflow-hidden">
+<div class="absolute bottom-0 w-full h-full" data-alt="A stylized minimalist grey silhouette of a Middle Eastern city skyline with minarets and traditional architecture, designed as a UI footer element for a clean corporate application." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHsQyiQ34BiE0_CmG8R18jm6F-YdKI-AYKo8I4stg9byXHm3OdsZa98AU7zAYjwj4ifeADCeYDY3YvobX_Az30TEds1Oy1jem8qP4G8Y1MjJZ5rVLbPxAQYvyGkKVLiwrCYNeUse2f8KJs51y5Y0lorEPpAuJgnqXdNwlhP-XH1I_ZLUAuugYGv1dKJnvQ6zga22BvYPkQN8vnz68n1X6oqikmZOj0gd9PIRwTeXd1_BybEIh10X54qg'); background-repeat: repeat-x; background-position: bottom; background-size: contain;">
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest shadow-[0_-4px_15px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm mt-1">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container dark:text-on-primary rounded-xl px-3 py-1.5 scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+<span class="text-label-sm font-label-sm mt-1">المعاملات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="text-label-sm font-label-sm mt-1">الأصول</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm mt-1">الإعدادات</span>
+</a>
+</nav>
+<script>
+        // Simple haptic feedback simulation on button press
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                if (window.navigator.vibrate) window.navigator.vibrate(10);
+            });
+        });
+    </script>
+</body></html>

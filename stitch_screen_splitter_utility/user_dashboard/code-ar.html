@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ar" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>يمن ترانسفير - لوحة التحكم</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container": "#f0eded",
+                "on-tertiary-container": "#c0c2c3",
+                "background": "#fcf9f8",
+                "secondary-fixed-dim": "#88d982",
+                "on-primary-fixed": "#410001",
+                "secondary-container": "#a0f399",
+                "primary-fixed": "#ffdad5",
+                "error": "#ba1a1a",
+                "surface-dim": "#dcd9d9",
+                "surface-container-low": "#f6f3f2",
+                "on-secondary-fixed-variant": "#005312",
+                "on-background": "#1b1c1c",
+                "on-tertiary": "#ffffff",
+                "outline": "#89726e",
+                "surface": "#fcf9f8",
+                "primary-container": "#8c3027",
+                "secondary-fixed": "#a3f69c",
+                "surface-container-high": "#eae7e7",
+                "on-primary-fixed-variant": "#812820",
+                "secondary": "#1b6d24",
+                "on-secondary-fixed": "#002204",
+                "inverse-on-surface": "#f3f0ef",
+                "outline-variant": "#ddc0bc",
+                "inverse-primary": "#ffb4aa",
+                "on-surface-variant": "#56423f",
+                "on-error-container": "#93000a",
+                "primary-fixed-dim": "#ffb4aa",
+                "surface-variant": "#e5e2e1",
+                "on-secondary-container": "#217128",
+                "on-surface": "#1b1c1c",
+                "inverse-surface": "#303030",
+                "error-container": "#ffdad6",
+                "on-primary-container": "#ffaca1",
+                "tertiary-fixed-dim": "#c5c7c8",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed-variant": "#454748",
+                "tertiary-fixed": "#e1e3e4",
+                "surface-bright": "#fcf9f8",
+                "primary": "#6d1913",
+                "on-error": "#ffffff",
+                "surface-tint": "#a03f34",
+                "tertiary": "#36393a",
+                "on-tertiary-fixed": "#191c1d",
+                "on-secondary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-container": "#4d5051",
+                "surface-container-highest": "#e5e2e1"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xl": "32px",
+                "margin-mobile": "20px",
+                "md": "16px",
+                "sm": "12px",
+                "base": "4px",
+                "xs": "8px",
+                "gutter": "16px",
+                "lg": "24px"
+            },
+            "fontFamily": {
+                "body-sm": ["Be Vietnam Pro"],
+                "label-lg": ["Be Vietnam Pro"],
+                "label-md": ["Be Vietnam Pro"],
+                "headline-md": ["Be Vietnam Pro"],
+                "label-sm": ["Be Vietnam Pro"],
+                "body-lg": ["Be Vietnam Pro"],
+                "headline-sm": ["Be Vietnam Pro"],
+                "body-md": ["Be Vietnam Pro"],
+                "headline-lg": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom pattern for background mimicking reference image */
+        .pattern-bg {
+            background-image: radial-gradient(circle at 2px 2px, #e5e2e1 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .drag-handle {
+            cursor: grab;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full bg-background dark:bg-background fixed top-0 z-40">
+<div class="flex items-center gap-sm">
+<button class="p-base hover:bg-surface-variant/10 transition-colors rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</div>
+<h1 class="text-headline-sm font-headline-lg font-bold text-primary dark:text-primary-fixed-dim">يمن ترانسفير</h1>
+<div class="flex items-center gap-sm">
+<button class="p-base hover:bg-surface-variant/10 transition-colors rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-margin-mobile">
+<!-- Welcome Section -->
+<section class="mb-xl">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-on-surface-variant font-body-md">صباح الخير،</p>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">أحمد منصور</h2>
+</div>
+<div class="flex items-center gap-xs px-sm py-xs bg-secondary-container rounded-full">
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-on-secondary-container">تم التحقق</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions / Assets Bento Grid -->
+<section class="grid grid-cols-2 gap-md mb-xl">
+<!-- My Vehicles -->
+<div class="col-span-1">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="text-label-lg font-label-lg text-on-surface-variant">مركباتي</h3>
+<span class="material-symbols-outlined text-primary text-sm">directions_car</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer">
+<div class="h-28 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional automotive photograph of a white 2023 Toyota Land Cruiser parked in a clean, modern garage with soft, warm lighting. The vehicle is pristine, reflecting high-quality institutional ownership. The background is a minimalist concrete aesthetic, reinforcing a secure and authoritative atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQEsNdAq8jy1zwFvTOXWw-HH4mFGSALf4MRBSykpeinxXzX3clk-DI8kma2W2fYLz6VfMyndQKduc3Cu47xmHMsEfwwzIX82ZXbMvzQAK_C7NOOzrpRfehA4yOppTku89yGgdOM6VP7skI0zHqIJkckLo27QHsz9J8oksretvTeO-vPnG0PHOpjVkdGVE7tuVx2ip8HrIfGznmz6rByNm0ntNQzOpZCOEDEHn9PeFJthqRVXYtnxeK8g"/>
+</div>
+<div class="p-sm">
+<p class="text-label-md font-label-md text-on-surface truncate">تويوتا لاند كروزر</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">2023 • 782-YAM</p>
+<button class="mt-xs w-full py-base bg-surface-variant text-on-surface-variant text-label-sm font-label-sm rounded-lg hover:bg-outline-variant transition-colors">
+                            نقل الملكية
+                        </button>
+</div>
+</div>
+</div>
+<!-- My Lands & Real Estate -->
+<div class="col-span-1">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="text-label-lg font-label-lg text-on-surface-variant">أراضي</h3>
+<span class="material-symbols-outlined text-primary text-sm">landscape</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden border border-outline-variant hover:shadow-md transition-shadow group cursor-pointer h-full flex flex-col">
+<div class="h-28 relative bg-surface-variant">
+<div class="absolute inset-0 pattern-bg opacity-50"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container opacity-20 text-4xl">map</span>
+</div>
+<div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur px-xs py-1 rounded shadow-sm">
+<p class="text-[10px] font-bold text-primary">مديرية صنعاء</p>
+</div>
+</div>
+<div class="p-sm flex-grow flex flex-col justify-between">
+<div>
+<p class="text-label-md font-label-md text-on-surface truncate">أرض سكنية</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">القطعة 442 • القطاع ب</p>
+</div>
+<button class="mt-xs w-full py-base bg-surface-variant text-on-surface-variant text-label-sm font-label-sm rounded-lg hover:bg-outline-variant transition-colors">
+                            إدارة الصكوك
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Prominent Call to Action -->
+<section class="mb-xl">
+<button class="w-full bg-primary py-lg rounded-xl shadow-lg flex items-center justify-center gap-sm group transition-transform duration-150" onclick="this.classList.add('scale-95'); setTimeout(() =&gt; this.classList.remove('scale-95'), 150)">
+<div class="p-xs bg-white/20 rounded-full group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-white">add_card</span>
+</div>
+<span class="text-headline-sm font-headline-sm text-white">بدء معاملة جديدة</span>
+</button>
+</section>
+<!-- Recent Activity / Verification Flow -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-md">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">قيد التحقق</h3>
+<button class="text-label-md font-label-md text-primary">عرض الكل</button>
+</div>
+<div class="space-y-sm">
+<!-- Transaction Card 1 -->
+<div class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">sync_alt</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="text-label-lg font-label-lg text-on-surface">بيع عقار #9021</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">منذ ساعتين</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">بانتظار التأكيد البيومتري</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<!-- Transaction Card 2 -->
+<div class="flex items-center gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">verified</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="text-label-lg font-label-lg text-on-surface">إعادة التحقق</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">أمس</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">تمت المزامنة مع الهوية الذكية</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Institutional Footer Ornament -->
+<footer class="flex flex-col items-center gap-sm mt-xl pb-base opacity-40">
+<div class="h-24 w-24">
+<img class="w-full h-full object-contain grayscale brightness-125" data-alt="A refined, symbolic digital illustration of a traditional Yemeni dragon blood tree rendered in a clean, minimalist vector style with a monochromatic primary red color. The illustration is designed to serve as a watermark-style ornament for a high-security government application, evoking a sense of heritage, stability, and growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX2QHgI07lXJ3LvvcHAyvND7K3sfznB8Dos-lWolHHkJM6yXB2pOJNe6-B6DrqFMctEo3_dgfQ4psOHgQqaZvs8YYv0R024wB1chRxCZNPhMcY7GyGEGHSHQjIfyvc-PBg0CW_JVXa9KqQk6I_ZolI3VY8MLKwkdpxfw5Dhf_p9Yp9llHCjTIPIupyr3V4AL3OQt9R7MTKnjkSpkvAsLDqt7DTbNtkhc4_nEF0yjTtVPj5VSJ_0lDU4A"/>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant text-center max-w-[200px]">مؤمن من قبل وزارة الداخلية وسجل الأملاك الرقمي</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest dark:bg-surface-container shadow-[0_-4px_15px_rgba(0,0,0,0.05)] rounded-t-xl">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-3 py-1.5 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm">الرئيسية</span>
+</a>
+<!-- Transactions -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 dark:hover:bg-surface-variant/30 transition-all" href="#">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="text-label-sm font-label-sm">النشاط</span>
+</a>
+<!-- Assets -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 dark:hover:bg-surface-variant/30 transition-all" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="text-label-sm font-label-sm">الأصول</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 dark:hover:bg-surface-variant/30 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">الملف</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', function(e) {
+                // Haptic feedback simulation
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Simple scroll observer for top bar elevation
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md', 'bg-white/80', 'backdrop-blur-md');
+                header.classList.remove('bg-background');
+            } else {
+                header.classList.remove('shadow-md', 'bg-white/80', 'backdrop-blur-md');
+                header.classList.add('bg-background');
+            }
+        });
+    </script>
+</body></html>

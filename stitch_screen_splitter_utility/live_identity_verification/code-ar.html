@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ar" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>يمن ترانسفير - التحقق المباشر</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Shared Components Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#f0eded",
+                    "on-tertiary-container": "#c0c2c3",
+                    "background": "#fcf9f8",
+                    "secondary-fixed-dim": "#88d982",
+                    "on-primary-fixed": "#410001",
+                    "secondary-container": "#a0f399",
+                    "primary-fixed": "#ffdad5",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dcd9d9",
+                    "surface-container-low": "#f6f3f2",
+                    "on-secondary-fixed-variant": "#005312",
+                    "on-background": "#1b1c1c",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#89726e",
+                    "surface": "#fcf9f8",
+                    "primary-container": "#8c3027",
+                    "secondary-fixed": "#a3f69c",
+                    "surface-container-high": "#eae7e7",
+                    "on-primary-fixed-variant": "#812820",
+                    "secondary": "#1b6d24",
+                    "on-secondary-fixed": "#002204",
+                    "inverse-on-surface": "#f3f0ef",
+                    "outline-variant": "#ddc0bc",
+                    "inverse-primary": "#ffb4aa",
+                    "on-surface-variant": "#56423f",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#ffb4aa",
+                    "surface-variant": "#e5e2e1",
+                    "on-secondary-container": "#217128",
+                    "on-surface": "#1b1c1c",
+                    "inverse-surface": "#303030",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#ffaca1",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "tertiary-fixed": "#e1e3e4",
+                    "surface-bright": "#fcf9f8",
+                    "primary": "#6d1913",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#a03f34",
+                    "tertiary": "#36393a",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#4d5051",
+                    "surface-container-highest": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-mobile": "20px",
+                    "md": "16px",
+                    "sm": "12px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "gutter": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Be Vietnam Pro"],
+                    "label-lg": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-sm": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-lg": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .circular-scanner {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #6d1913, transparent);
+            top: 0;
+            animation: scan 3s ease-in-out infinite;
+        }
+        @keyframes scan {
+            0%, 100% { top: 0%; }
+            50% { top: 100%; }
+        }
+        .pulse-secondary {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(27, 109, 36, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(27, 109, 36, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(27, 109, 36, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background selection:bg-primary/20">
+<!-- Top AppBar (from Shared Components) -->
+<header class="fixed top-0 w-full bg-background z-50 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-surface-variant/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="text-headline-sm font-headline-lg font-bold text-primary">يمن ترانسفير</h1>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-surface-variant/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-20 pb-32 px-margin-mobile max-w-md mx-auto flex flex-col items-center min-h-screen">
+<!-- Status Indicator -->
+<div class="mb-xl flex flex-col items-center gap-base">
+<div class="flex items-center gap-xs bg-secondary-container px-3 py-1 rounded-full border border-secondary/20 shadow-sm pulse-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-label-md text-on-secondary-container">متصل | Connected</span>
+</div>
+</div>
+<!-- Camera Interface Section -->
+<section class="w-full flex flex-col items-center gap-lg">
+<!-- Circular Camera Viewport -->
+<div class="relative w-64 h-64 md:w-80 md:h-80">
+<!-- Outer Ring with Gradient -->
+<div class="absolute -inset-2 rounded-full border-4 border-dashed border-primary/20 animate-[spin_20s_linear_infinite]"></div>
+<!-- Main Container -->
+<div class="w-full h-full rounded-full border-4 border-surface-container shadow-xl overflow-hidden circular-scanner">
+<!-- Placeholder Image (Representing Live Feed) -->
+<img class="w-full h-full object-cover" data-alt="A clean, close-up studio portrait of a young Yemeni professional man looking directly into a high-definition camera lens. He has a friendly, neutral expression with soft, warm lighting that highlights clear skin and dark hair. The background is a minimalist, slightly blurred office environment with white and soft beige tones, reflecting the high-stakes, secure institutional atmosphere of the Yemen Transfer digital property exchange app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsGBrX0Cw2Sf658PAw3c2uHLxkkyhI2-1JVPmQlOsEYVeiFbp1HWPYW4tBKrxgyKeTWNq_rQuxvwsZhzuUz2WkcoOXPk9jfqqgNQSyfPFHU11KFPytr_wrs1QZ5XFqMPEVttWGyVPy8jGucUysAFZhRVxYZ5AbxRpdY7ns1bnaNvJNpSdpkOkmqTcMnCy3COLQBMSNfYKBWHTPK6BvDeqURLrsLWpfPRmr9Len8QRuMfbIoKzkgOjbIg"/>
+<!-- Scanner Animation Overlay -->
+<div class="scanner-line"></div>
+<!-- Glass Face Framing Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-5/6 h-5/6 border-[1px] border-white/30 rounded-full"></div>
+</div>
+</div>
+<!-- Live Status Badge (floating on circle) -->
+<div class="absolute bottom-4 right-4 bg-primary text-white p-2 rounded-full shadow-lg border-2 border-surface">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">videocam</span>
+</div>
+</div>
+<!-- Instructions -->
+<div class="text-center space-y-base max-w-[280px]">
+<h2 class="text-headline-md font-headline-md text-on-surface">يمن ترانسفير: التحقق المباشر</h2>
+<p class="text-on-surface-variant font-body-md">Yemen Transfer: Live Verification</p>
+<div class="mt-md py-2 border-y border-outline-variant/30">
+<p class="text-primary font-label-lg uppercase tracking-wider">انظر إلى الكاميرا</p>
+<p class="text-on-surface-variant text-label-md">Look into the Camera</p>
+</div>
+</div>
+</section>
+<!-- Action Cards Section -->
+<section class="w-full mt-xl flex flex-col gap-md">
+<!-- Primary Action: Take Selfie -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-md flex items-center justify-between shadow-sm hover:bg-surface-variant/10 active:scale-95 transition-all duration-150">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">photo_camera</span>
+</div>
+<div class="text-right">
+<p class="text-label-lg font-headline-sm text-on-surface">التقط صورة ذاتية</p>
+<p class="text-label-sm text-on-surface-variant">Take Selfie</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<!-- Secondary Action: Video Call -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-md flex items-center justify-between shadow-sm hover:bg-surface-variant/10 active:scale-95 transition-all duration-150">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">video_chat</span>
+</div>
+<div class="text-right">
+<p class="text-label-lg font-headline-sm text-on-surface">مكالمة فيديو سريعة (اختياري)</p>
+<p class="text-label-sm text-on-surface-variant">Quick Video Call (Optional)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<!-- Confirmation Message -->
+<div class="flex items-center justify-center gap-xs mt-md">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md text-on-surface-variant">تم تأكيد الهوية | Identity Confirmed</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (from Shared Components) -->
+<!-- Note: "Assets" is mapped as active for this context as verification is part of asset management process -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest shadow-[0_-4px_15px_rgba(0,0,0,0.05)] rounded-t-xl px-4 py-3 pb-safe flex justify-around items-center">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm">الرئيسية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all duration-150">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="text-label-sm font-label-sm">المعاملات</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1.5 scale-90 transition-all duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="text-label-sm font-label-sm">الأصول</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:bg-surface-variant/20 transition-all duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">الإعدادات</span>
+</div>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.add('scale-95');
+                    setTimeout(() => this.classList.remove('scale-95'), 150);
+                });
+            });
+        });
+    </script>
+</body></html>
