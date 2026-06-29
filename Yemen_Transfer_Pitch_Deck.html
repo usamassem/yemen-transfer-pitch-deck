@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yemen Transfer — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6d1913;
+  --primary-container: #8c3027;
+  --on-primary: #ffffff;
+  --primary-fixed-dim: #ffb4aa;
+  --secondary: #1b6d24;
+  --secondary-container: #a0f399;
+  --on-secondary-container: #005312;
+  --background: #fcf9f8;
+  --surface: #fcf9f8;
+  --surface-dim: #dcd9d9;
+  --surface-container-low: #f6f3f2;
+  --surface-container: #f0eded;
+  --surface-container-high: #eae7e7;
+  --surface-container-highest: #e5e2e1;
+  --surface-variant: #e5e2e1;
+  --on-surface: #1b1c1c;
+  --on-surface-variant: #56423f;
+  --outline: #89726e;
+  --outline-variant: #ddc0bc;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --gold: #C8A84A;
+  --navy: #1B2A4A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--background);
+  color: var(--on-surface);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.slides-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; position:relative; }
+.slides-track { display:flex; flex-direction:column; width:100%; height:100%; transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); will-change:transform; }
+.slide { min-height:100vh; width:100%; flex-shrink:0; display:flex; flex-direction:column; justify-content:center; padding:40px 60px; position:relative; overflow:hidden; }
+
+.nav-bar {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:14px;
+  background:rgba(27,28,28,0.88); backdrop-filter:blur(16px);
+  padding:8px 20px; border-radius:50px; z-index:1000;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.nav-bar button { background:none; border:none; color:var(--surface-variant); cursor:pointer; padding:5px 10px; border-radius:16px; font-size:12px; font-weight:600; font-family:inherit; transition:all 0.2s; }
+.nav-bar button:hover { color:#fff; background:rgba(255,255,255,0.06); }
+.nav-bar button.active { color:var(--gold); background:rgba(200,168,74,0.12); }
+.nav-dots { display:flex; gap:5px; align-items:center; }
+.nav-dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.15); transition:all 0.3s; cursor:pointer; border:none; padding:0; }
+.nav-dot.active { background:var(--gold); width:22px; border-radius:3px; }
+.nav-arrow { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.nav-arrow:hover { background:rgba(255,255,255,0.1); border-color:var(--gold); }
+#slideCounter { color:rgba(255,255,255,0.35); font-size:11px; font-weight:600; min-width:36px; text-align:center; }
+
+.slide-in { animation:slideUp 0.7s ease-out forwards; }
+@keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+.float { animation:float 3s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+h1 { font-size:50px; font-weight:800; line-height:1.1; letter-spacing:-0.02em; }
+h2 { font-size:36px; font-weight:700; line-height:1.15; letter-spacing:-0.01em; }
+h3 { font-size:20px; font-weight:700; }
+.subtitle { font-size:17px; font-weight:500; }
+.body { font-size:15px; line-height:1.6; }
+.tag { display:inline-block; padding:4px 14px; border-radius:20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+
+.card { background:#fff; border:1px solid var(--outline-variant); border-radius:14px; padding:24px; transition:transform 0.2s, box-shadow 0.2s; }
+.card:hover { box-shadow:0 6px 24px rgba(0,0,0,0.04); transform:translateY(-1px); }
+.card-dark { background:rgba(20,36,54,0.92); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:24px; backdrop-filter:blur(8px); }
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; }
+
+.stat-number { font-size:38px; font-weight:800; color:var(--gold); line-height:1; }
+.accent-line { width:50px; height:3px; background:var(--gold); border-radius:2px; }
+.accent-line-error { width:50px; height:3px; background:var(--error); border-radius:2px; }
+
+.step-circle { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex-shrink:0; }
+
+.badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:700; }
+.badge-green { background:rgba(27,109,36,0.12); color:var(--secondary); }
+.badge-red { background:rgba(186,26,26,0.10); color:var(--error); }
+.badge-gold { background:rgba(200,168,74,0.12); color:var(--gold); }
+
+.moi-table { width:100%; border-collapse:collapse; }
+.moi-table th { text-align:left; padding:8px 12px; font-size:11px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.03em; border-bottom:1px solid rgba(255,255,255,0.06); }
+.moi-table td { padding:8px 12px; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); }
+
+.bar-chart { display:flex; flex-direction:column; gap:14px; }
+.bar-row { display:flex; align-items:center; gap:14px; }
+.bar-label { width:110px; font-size:14px; font-weight:600; }
+.bar { height:32px; border-radius:6px; transition:width 1.2s ease-out; }
+
+.glow-gold { animation:glowPulse 3s ease-in-out infinite; }
+@keyframes glowPulse { 0%,100% { box-shadow:0 0 12px rgba(200,168,74,0.08); } 50% { box-shadow:0 0 30px rgba(200,168,74,0.2); } }
+
+/* ── Slide backgrounds ── */
+.slide-1 { background:linear-gradient(135deg,#0a1628 0%,#112240 50%,var(--navy) 100%); }
+.slide-1::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 75% 20%, rgba(200,168,74,0.05) 0%, transparent 60%); }
+.gold-bar { position:absolute; left:0; top:0; width:5px; height:100%; background:var(--gold); }
+
+.slide-2 { background:var(--surface); }
+.slide-3 { background:linear-gradient(135deg,var(--navy) 0%,#152238 100%); }
+.slide-4 { background:var(--surface); }
+.slide-5 { background:linear-gradient(135deg,#080e18 0%,#0D1B2A 100%); }
+.slide-6 { background:var(--surface); }
+.slide-7 { background:linear-gradient(135deg,#0a1628 0%,var(--navy) 100%); }
+
+.slide-8 { background:var(--surface-dim); padding:0; display:flex; align-items:center; justify-content:center; }
+.phone-frame {
+  width:375px; height:812px;
+  background:var(--background);
+  border-radius:40px;
+  overflow:hidden;
+  box-shadow:0 20px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06);
+  position:relative;
+  flex-shrink:0;
+}
+.phone-frame iframe { width:100%; height:100%; border:none; display:block; }
+
+.slide-9 { background:#000; padding:0; }
+.slide-9 img { width:100%; height:100vh; object-fit:contain; }
+
+@media (max-width:1024px) {
+  .slide { padding:32px 24px; }
+  h1 { font-size:32px; }
+  h2 { font-size:26px; }
+  .grid-3 { grid-template-columns:1fr; }
+  .grid-2 { grid-template-columns:1fr; }
+  .phone-frame { width:300px; height:650px; border-radius:28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="slides-wrapper">
+  <div class="slides-track" id="track">
+
+    <!-- ═══ 1: TITLE ═══ -->
+    <section class="slide slide-1" data-index="0">
+      <div class="gold-bar"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;height:100%;">
+        <div class="slide-in" style="animation-delay:0.1s">
+          <span class="tag" style="background:var(--gold);color:#0a1628;margin-bottom:14px">Ministry of Interior  •  Partner</span>
+          <h1 style="color:#fff">Yemen Transfer</h1>
+          <h1 style="color:var(--gold);margin-top:2px">Secure Digital<br>Property Exchange</h1>
+          <div class="accent-line" style="margin:20px 0"></div>
+          <p class="subtitle" style="color:var(--outline);max-width:460px">Revolutionizing Vehicle and Land Ownership Transfers via Biometric and Document Verification</p>
+          <p style="margin-top:28px;font-size:14px;color:var(--gold);font-weight:600">Secured &amp; Monitored in Partnership with the Ministry of Interior</p>
+        </div>
+        <div class="slide-in" style="animation-delay:0.3s;text-align:center">
+          <img src="screens/stitch_screen_splitter_utility/login_create_account_frameless/screen.png" alt="Login" class="float" style="height:75vh;max-height:640px;width:auto;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.3)">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2: PROBLEM ═══ -->
+    <section class="slide slide-2" data-index="1">
+      <div class="slide-in" style="max-width:1100px;margin:0 auto;width:100%">
+        <span class="tag" style="background:var(--error-container);color:var(--error);margin-bottom:10px">The Challenge</span>
+        <h2 style="color:var(--navy)">Friction, Fraud, and Fragmented Oversight</h2>
+        <div class="accent-line-error" style="margin:14px 0"></div>
+        <div class="grid-2" style="margin-top:18px;gap:24px">
+          <div class="card">
+            <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+              <div style="background:#fce8d0;border-radius:10px;padding:14px 18px;text-align:center;flex:1;min-width:110px">
+                <div style="font-size:26px;margin-bottom:4px">📄</div>
+                <p style="font-size:13px;font-weight:600;color:var(--on-surface)">Forged deeds &amp; plates</p>
+              </div>
+              <div style="background:#fce8d0;border-radius:10px;padding:14px 18px;text-align:center;flex:1;min-width:110px">
+                <div style="font-size:26px;margin-bottom:4px">⏰</div>
+                <p style="font-size:13px;font-weight:600;color:var(--on-surface)">Weeks of travel &amp; paperwork</p>
+              </div>
+            </div>
+            <p style="font-weight:700;color:var(--error);font-size:14px;margin-bottom:4px">Verification Vulnerabilities</p>
+            <p class="body" style="color:var(--on-surface-variant);font-size:14px">High risks from forged deeds, duplicate plates, and identity misrepresentation.</p>
+          </div>
+          <div class="card">
+            <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+              <div style="background:#d0def0;border-radius:10px;padding:14px 18px;text-align:center;flex:1;min-width:110px">
+                <div style="font-size:26px;margin-bottom:4px">🗄️</div>
+                <p style="font-size:13px;font-weight:600;color:var(--on-surface)">Siloed databases, no real-time view</p>
+              </div>
+              <div style="background:#d0def0;border-radius:10px;padding:14px 18px;text-align:center;flex:1;min-width:110px">
+                <div style="font-size:26px;margin-bottom:4px">❓</div>
+                <p style="font-size:13px;font-weight:600;color:var(--on-surface)">Who owns what? Tracking gap</p>
+              </div>
+            </div>
+            <p style="font-weight:700;color:var(--error);font-size:14px;margin-bottom:4px">The Tracking Gap</p>
+            <p class="body" style="color:var(--on-surface-variant);font-size:14px">No centralized system for authorities to monitor property velocity in real-time.</p>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:12px 18px;background:var(--surface-container-low);border-radius:10px;border-left:3px solid var(--error)">
+          <p style="font-size:13px;color:var(--on-surface-variant)"><strong>Administrative Delays:</strong> Traditional transfers require weeks of manual paperwork and repetitive visits to regional offices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3: SOLUTION ═══ -->
+    <section class="slide slide-3" data-index="2">
+      <div class="gold-bar"></div>
+      <div class="slide-in" style="max-width:1100px;margin:0 auto;width:100%">
+        <span class="tag" style="background:rgba(200,168,74,0.12);color:var(--gold);margin-bottom:10px">The Solution</span>
+        <h2 style="color:var(--gold)">A Unified, Tamper-Proof Ecosystem</h2>
+        <div class="accent-line" style="margin:12px 0"></div>
+        <div class="grid-2" style="margin-top:16px;gap:24px;align-items:start">
+          <div style="text-align:center">
+            <img src="screens/stitch_screen_splitter_utility/user_dashboard/screen.png" alt="Dashboard" style="height:68vh;max-height:560px;width:auto;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.25)">
+          </div>
+          <div class="card-dark">
+            <h3 style="color:var(--gold);font-size:18px;margin-bottom:16px">Key Capabilities</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,74,0.12);display:flex;align-items:center;justify-content:center;font-size:17px">🚗</div>
+                <div><p style="font-weight:700;color:#fff;font-size:14px">Dual-Asset Framework</p><p style="font-size:12px;color:var(--outline)">Vehicles &amp; real estate in one intuitive platform.</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,74,0.12);display:flex;align-items:center;justify-content:center;font-size:17px">🆔</div>
+                <div><p style="font-weight:700;color:#fff;font-size:14px">Identity First</p><p style="font-size:12px;color:var(--outline)">Accounts tied to verified credentials, biometrics, and phone records.</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,74,0.12);display:flex;align-items:center;justify-content:center;font-size:17px">🏛️</div>
+                <div><p style="font-weight:700;color:#fff;font-size:14px">Institutional Alignment</p><p style="font-size:12px;color:var(--outline)">External digital gateway for state property management.</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,74,0.12);display:flex;align-items:center;justify-content:center;font-size:17px">🔐</div>
+                <div><p style="font-weight:700;color:#fff;font-size:14px">End-to-End Encryption</p><p style="font-size:12px;color:var(--outline)">All data encrypted at rest and in transit.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4: VERIFICATION ═══ -->
+    <section class="slide slide-4" data-index="3">
+      <div class="slide-in" style="max-width:1100px;margin:0 auto;width:100%">
+        <span class="tag" style="background:var(--primary);color:#fff;margin-bottom:10px">Trust Engine</span>
+        <h2 style="color:var(--navy)">Multi-Factor Asset &amp; User Validation</h2>
+        <div class="accent-line" style="margin:12px 0;background:var(--primary)"></div>
+        <div class="grid-3" style="margin-top:16px;gap:20px">
+          <div class="card" style="text-align:center;padding:20px">
+            <div class="step-circle" style="background:var(--primary);color:#fff;margin:0 auto 10px">1</div>
+            <h3 style="font-size:16px;color:var(--navy);margin-bottom:8px">Legal Documentation</h3>
+            <img src="screens/stitch_screen_splitter_utility/vehicle_transfer_steps/screen.png" alt="Docs" style="height:38vh;max-height:320px;width:auto;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+            <p style="font-size:13px;color:var(--on-surface-variant);margin-top:10px">In-app scanning and OCR parsing of official vehicle registration (Koushan) or land deeds.</p>
+          </div>
+          <div class="card" style="text-align:center;padding:20px">
+            <div class="step-circle" style="background:var(--primary);color:#fff;margin:0 auto 10px">2</div>
+            <h3 style="font-size:16px;color:var(--navy);margin-bottom:8px">Live Asset Capture</h3>
+            <img src="screens/stitch_screen_splitter_utility/live_identity_verification/screen.png" alt="Capture" style="height:38vh;max-height:320px;width:auto;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+            <p style="font-size:13px;color:var(--on-surface-variant);margin-top:10px">Real-time 360° camera capture of vehicle or land coordinates to prove existence.</p>
+          </div>
+          <div class="card" style="text-align:center;padding:20px">
+            <div class="step-circle" style="background:var(--primary);color:#fff;margin:0 auto 10px">3</div>
+            <h3 style="font-size:16px;color:var(--navy);margin-bottom:8px">Biometric Match</h3>
+            <div style="width:120px;height:120px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:48px;margin:20px auto">👤</div>
+            <p style="font-size:13px;color:var(--on-surface-variant);margin-top:10px">Anti-spoofing facial selfie matching the trader against their government ID.</p>
+          </div>
+        </div>
+        <div style="margin-top:14px;text-align:center;padding:10px;background:var(--surface-container-low);border-radius:10px;border:1px solid var(--outline-variant)">
+          <p style="font-size:13px;color:var(--on-surface-variant)">All three phases must be completed before a transfer is submitted for Ministry review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5: MOI TERMINAL ═══ -->
+    <section class="slide slide-5" data-index="4">
+      <div class="gold-bar"></div>
+      <div class="slide-in" style="max-width:1200px;margin:0 auto;width:100%;height:100%;display:flex;flex-direction:column">
+        <div style="flex-shrink:0;margin-bottom:6px">
+          <span class="tag" style="background:rgba(200,168,74,0.12);color:var(--gold);margin-bottom:6px">MOI Terminal</span>
+          <h2 style="color:var(--gold);font-size:30px">Absolute Visibility &amp; Sovereignty</h2>
+          <div class="accent-line" style="margin:8px 0"></div>
+        </div>
+        <div style="flex:1;display:flex;gap:12px;min-height:0">
+          <!-- LEFT: Descriptive text -->
+          <div style="flex:0.5;display:flex;flex-direction:column;justify-content:center;gap:14px;padding-right:8px">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <span style="font-size:18px;flex-shrink:0;color:var(--gold)">📡</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Real-Time Audit Trail</p><p style="font-size:12px;color:var(--outline);line-height:1.5">Complete transparency for state authorities regarding every transaction nationwide, updating instantly as trades occur.</p></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <span style="font-size:18px;flex-shrink:0;color:var(--gold)">🚨</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Proactive Threat Mitigation</p><p style="font-size:12px;color:var(--outline);line-height:1.5">Automated flagging systems for anomalous trading frequencies, unverified profiles, or disputed property coordinates.</p></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <span style="font-size:18px;flex-shrink:0;color:var(--gold)">📋</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Permanent Digital Ledger</p><p style="font-size:12px;color:var(--outline);line-height:1.5">Provides a clean, unalterable digital baseline to settle civil ownership disputes instantly and safeguard national security.</p></div>
+            </div>
+          </div>
+          <!-- RIGHT: Actual widgets -->
+          <div style="flex:1.5;display:flex;flex-direction:column;gap:8px;overflow:hidden;background:rgba(12,10,10,0.9);border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,0.06);font-family:'Be Vietnam Pro',sans-serif">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+              <div style="background:#1c1a1a;border-radius:10px;border:1px solid #4d4443;padding:12px;display:flex;flex-direction:column;gap:2px">
+                <div style="display:flex;justify-content:space-between;align-items:start">
+                  <span style="font-size:11px;font-weight:600;color:#ddc0bc">Daily Volume</span>
+                  <span style="color:#ff4d3d;font-size:16px;font-family:'Material Symbols Outlined'">trending_up</span>
+                </div>
+                <div style="font-size:22px;font-weight:700;color:#e1e1e1">12,842</div>
+                <div style="font-size:10px;color:#1b6d24">+12% from yesterday</div>
+              </div>
+              <div style="background:#1c1a1a;border-radius:10px;border:1px solid #4d4443;padding:12px;display:flex;flex-direction:column;gap:2px">
+                <div style="display:flex;justify-content:space-between;align-items:start">
+                  <span style="font-size:11px;font-weight:600;color:#ddc0bc">Asset Transfers</span>
+                  <span style="color:#1b6d24;font-size:16px;font-family:'Material Symbols Outlined'">sync_alt</span>
+                </div>
+                <div style="font-size:22px;font-weight:700;color:#e1e1e1">8,401</div>
+                <div style="font-size:10px;color:#ddc0bc">Processing: 412</div>
+              </div>
+              <div style="background:#1c1a1a;border-radius:10px;border:1px solid #4d4443;padding:12px;display:flex;flex-direction:column;gap:2px">
+                <div style="display:flex;justify-content:space-between;align-items:start">
+                  <span style="font-size:11px;font-weight:600;color:#ddc0bc">Identity Checks</span>
+                  <span style="color:#ff4d3d;font-size:16px;font-family:'Material Symbols Outlined'">badge</span>
+                </div>
+                <div style="font-size:22px;font-weight:700;color:#e1e1e1">245,012</div>
+                <div style="font-size:10px;color:#1b6d24">99.8% Success Rate</div>
+              </div>
+              <div style="background:#8c3027;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden">
+                <div style="position:absolute;right:-10px;bottom:-10px;opacity:0.1;font-size:80px;font-family:'Material Symbols Outlined';color:#fff">warning</div>
+                <div style="display:flex;justify-content:space-between;align-items:start;z-index:1">
+                  <span style="font-size:11px;font-weight:600;color:#ffaca1">Critical Alerts</span>
+                  <span style="color:#fff;font-size:14px;font-family:'Material Symbols Outlined';animation:pulse 2s infinite">emergency</span>
+                </div>
+                <div style="font-size:22px;font-weight:700;color:#fff;z-index:1">14 Active</div>
+                <div style="font-size:10px;color:#ffb4aa;font-weight:700;text-decoration:underline;cursor:pointer;z-index:1">View Incident Queue</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;gap:8px;min-height:0">
+              <div style="flex:1.2;background:#1c1a1a;border-radius:10px;border:1px solid #4d4443;display:flex;flex-direction:column;overflow:hidden">
+                <div style="padding:8px 12px;border-bottom:1px solid #4d4443;display:flex;justify-content:space-between;align-items:center;background:rgba(40,37,37,0.5)">
+                  <h2 style="font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;color:#e1e1e1"><span style="color:#1b6d24;font-size:14px;font-family:'Material Symbols Outlined'">database</span> Live Transaction Stream</h2>
+                  <div style="display:flex;gap:4px">
+                    <button style="padding:3px 6px;background:#282525;border:1px solid #4d4443;border-radius:6px;font-size:10px;color:#ddc0bc;font-family:'Material Symbols Outlined'">filter_list</button>
+                    <button style="padding:3px 6px;background:#282525;border:1px solid #4d4443;border-radius:6px;font-size:10px;color:#ddc0bc;font-family:'Material Symbols Outlined'">download</button>
+                  </div>
+                </div>
+                <div style="flex:1;overflow-y:auto;font-size:11px">
+                  <table style="width:100%;border-collapse:collapse">
+                    <thead><tr style="background:rgba(40,37,37,0.5);position:sticky;top:0">
+                      <th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#ddc0bc;text-transform:uppercase">Type</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#ddc0bc;text-transform:uppercase">Subject</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#ddc0bc;text-transform:uppercase">Governorate</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#ddc0bc;text-transform:uppercase">Timestamp</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#ddc0bc;text-transform:uppercase">Status</th>
+                    </tr></thead>
+                    <tbody style="color:#e1e1e1">
+                      <tr style="border-bottom:1px solid rgba(77,68,67,0.1)"><td style="padding:6px 10px;font-family:'Material Symbols Outlined';color:#ff4d3d;font-size:12px">home</td><td style="padding:6px 10px;font-weight:700">Residential Plot 44-A</td><td style="padding:6px 10px">Aden City</td><td style="padding:6px 10px;font-size:10px">14:22:01</td><td style="padding:6px 10px"><span style="font-size:9px;font-weight:700;color:#1b6d24;display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;background:#1b6d24;border-radius:50%"></span> Approved</span></td></tr>
+                      <tr style="border-bottom:1px solid rgba(77,68,67,0.1)"><td style="padding:6px 10px;font-family:'Material Symbols Outlined';color:#ff4d3d;font-size:12px">directions_car</td><td style="padding:6px 10px;font-weight:700">Nissan Patrol (2023)</td><td style="padding:6px 10px">Abyan</td><td style="padding:6px 10px;font-size:10px">14:21:44</td><td style="padding:6px 10px"><span style="font-size:9px;font-weight:700;color:#ffb4aa;display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;background:#ffb4aa;border-radius:50%;animation:pulse 2s infinite"></span> Pending</span></td></tr>
+                      <tr style="border-bottom:1px solid rgba(77,68,67,0.1);background:rgba(255,77,61,0.04)"><td style="padding:6px 10px;font-family:'Material Symbols Outlined';color:#ff4d3d;font-size:12px">apartment</td><td style="padding:6px 10px;font-weight:700">Commercial Block B</td><td style="padding:6px 10px">Aden</td><td style="padding:6px 10px;font-size:10px">14:21:12</td><td style="padding:6px 10px"><span style="font-size:9px;font-weight:700;color:#ff4d3d;display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;background:#ff4d3d;border-radius:50%"></span> Flagged</span></td></tr>
+                      <tr style="border-bottom:1px solid rgba(77,68,67,0.1)"><td style="padding:6px 10px;font-family:'Material Symbols Outlined';color:#ff4d3d;font-size:12px">home</td><td style="padding:6px 10px;font-weight:700">Coastal Villa 02</td><td style="padding:6px 10px">Hadramawt</td><td style="padding:6px 10px;font-size:10px">14:20:55</td><td style="padding:6px 10px"><span style="font-size:9px;font-weight:700;color:#1b6d24;display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;background:#1b6d24;border-radius:50%"></span> Approved</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div style="flex:0.8;background:#1c1a1a;border-radius:10px;border:1px solid #4d4443;display:flex;flex-direction:column;overflow:hidden">
+                <div style="padding:8px 12px;border-bottom:1px solid #4d4443;display:flex;justify-content:space-between;align-items:center;background:rgba(40,37,37,0.5)">
+                  <h2 style="font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;color:#ff4d3d"><span style="font-size:14px;font-family:'Material Symbols Outlined'">warning</span> Flagged Activity</h2>
+                  <button style="font-size:9px;color:#ddc0bc;background:none;border:none;cursor:pointer">Resolve All</button>
+                </div>
+                <div style="flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px">
+                  <div style="padding:8px;border-radius:6px;border-left:3px solid #ff4d3d;background:#282525">
+                    <div style="display:flex;justify-content:space-between;align-items:start">
+                      <span style="font-size:9px;font-weight:700;background:rgba(255,77,61,0.15);color:#ff4d3d;padding:1px 6px;border-radius:4px;text-transform:uppercase">High Risk (88)</span>
+                      <span style="font-size:9px;color:#ddc0bc">2m ago</span>
+                    </div>
+                    <p style="font-size:11px;font-weight:700;color:#e1e1e1;margin-top:4px">Property Sale: ID-9021-YE</p>
+                    <p style="font-size:10px;color:#ddc0bc">Duplicate Smart ID detected. Potential impersonation.</p>
+                    <div style="display:flex;gap:4px;margin-top:4px">
+                      <button style="flex:1;padding:3px;background:#ff4d3d;color:#fff;border:none;border-radius:4px;font-size:9px;font-weight:700;cursor:pointer">Intercept</button>
+                      <button style="flex:1;padding:3px;background:transparent;border:1px solid #4d4443;color:#ddc0bc;border-radius:4px;font-size:9px;cursor:pointer">Audit</button>
+                    </div>
+                  </div>
+                  <div style="padding:8px;border-radius:6px;border-left:3px solid #ff4d3d;background:#282525">
+                    <div style="display:flex;justify-content:space-between;align-items:start">
+                      <span style="font-size:9px;font-weight:700;background:rgba(255,77,61,0.15);color:#ff4d3d;padding:1px 6px;border-radius:4px;text-transform:uppercase">Medium Risk (64)</span>
+                      <span style="font-size:9px;color:#ddc0bc">15m ago</span>
+                    </div>
+                    <p style="font-size:11px;font-weight:700;color:#e1e1e1;margin-top:4px">Vehicle Transfer: Toyota Hilux</p>
+                    <p style="font-size:10px;color:#ddc0bc">VIN mismatch with customs database.</p>
+                    <div style="display:flex;gap:4px;margin-top:4px">
+                      <button style="flex:1;padding:3px;background:#ff4d3d;color:#fff;border:none;border-radius:4px;font-size:9px;font-weight:700;cursor:pointer">Investigate</button>
+                      <button style="flex:1;padding:3px;background:transparent;border:1px solid #4d4443;color:#ddc0bc;border-radius:4px;font-size:9px;cursor:pointer">Release</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6: MARKET ═══ -->
+    <section class="slide slide-6" data-index="5">
+      <div class="slide-in" style="max-width:1100px;margin:0 auto;width:100%">
+        <span class="tag" style="background:var(--secondary-container);color:var(--on-secondary-container);margin-bottom:10px">Market Opportunity</span>
+        <h2 style="color:var(--navy)">Value Proposition &amp; Financial Sustainability</h2>
+        <div class="accent-line" style="margin:12px 0;background:var(--secondary)"></div>
+        <div class="grid-2" style="margin-top:16px;gap:24px">
+          <div class="card">
+            <h3 style="font-size:17px;color:var(--navy);margin-bottom:16px">Per-Transaction Cost</h3>
+            <div class="bar-chart">
+              <div class="bar-row"><span class="bar-label" style="color:var(--on-surface)">Traditional</span><div class="bar" style="width:85%;background:var(--outline)"></div><span style="font-weight:700;font-size:15px">$85</span></div>
+              <div class="bar-row"><span class="bar-label" style="color:var(--navy);font-weight:700">Yemen Transfer</span><div class="bar glow-gold" style="width:14%;background:var(--gold)"></div><span style="font-weight:700;font-size:15px;color:var(--gold)">$12</span></div>
+            </div>
+            <div style="margin-top:18px;padding:14px;background:var(--navy);border-radius:10px;text-align:center">
+              <p style="font-size:15px;font-weight:700;color:var(--gold)">86% reduction in processing costs</p>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:17px;color:var(--navy);margin-bottom:16px">Revenue Architecture</h3>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface-container-low);border-radius:10px">
+                <div style="font-size:22px">💰</div>
+                <div style="flex:1"><p style="font-weight:700;font-size:13px">Micro-Transaction Fee</p><p style="font-size:11px;color:var(--on-surface-variant)">$2–5 per verified transfer</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface-container-low);border-radius:10px">
+                <div style="font-size:22px">🏛️</div>
+                <div style="flex:1"><p style="font-weight:700;font-size:13px">Gov Integration License</p><p style="font-size:11px;color:var(--on-surface-variant)">$50K–100K / yr annual SaaS</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface-container-low);border-radius:10px">
+                <div style="font-size:22px">📊</div>
+                <div style="flex:1"><p style="font-weight:700;font-size:13px">Premium Verification</p><p style="font-size:11px;color:var(--on-surface-variant)">$10/trade expedited</p></div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface-container-low);border-radius:10px">
+                <div style="font-size:22px">🤝</div>
+                <div style="flex:1"><p style="font-weight:700;font-size:13px">Data Partnerships</p><p style="font-size:11px;color:var(--on-surface-variant)">Reports for banks &amp; insurers</p></div>
+              </div>
+            </div>
+            <div style="margin-top:12px;padding:12px;background:var(--navy);border-radius:10px;text-align:center">
+              <p style="font-size:15px;font-weight:700;color:var(--gold)">Projected ARR: $1.2M by Year 2</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 7: VISION ═══ -->
+    <section class="slide slide-7" data-index="6">
+      <div class="gold-bar"></div>
+      <div class="slide-in" style="display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:center;max-width:1100px;margin:0 auto;width:100%;height:100%">
+        <div>
+          <span class="tag" style="background:rgba(200,168,74,0.12);color:var(--gold);margin-bottom:10px">The Future</span>
+          <h2 style="color:var(--gold)">Shaping the Future of Secure Property Exchange</h2>
+          <div class="accent-line" style="margin:14px 0"></div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="font-size:20px">🚀</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Modernization</p><p style="font-size:12px;color:var(--outline)">Elevating Yemen's civil service to a secure, modern standard.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="font-size:20px">🤝</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Security Partnership</p><p style="font-size:12px;color:var(--outline)">Commercial scalability enhancing national asset security.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <span style="font-size:20px">📋</span>
+              <div><p style="font-weight:700;color:#fff;font-size:14px">Next Phase</p><p style="font-size:12px;color:var(--outline)">Data registry integrations and localized beta testing.</p></div>
+            </div>
+          </div>
+          <div style="margin-top:24px;padding:16px 24px;background:var(--gold);border-radius:12px;text-align:center;display:inline-block">
+            <p style="font-size:17px;font-weight:800;color:#0a1628">Invest in Yemen's Digital Future</p>
+          </div>
+          <p style="margin-top:16px;font-size:11px;color:var(--outline)">Contact: founder@yemen-transfer.com  •  Yemen Transfer © 2026</p>
+        </div>
+        <div style="text-align:center">
+          <img src="stitch_screen_splitter_utility/confirmation_screen/screen.png" alt="Transfer Confirmation" class="float" style="height:68vh;max-height:560px;width:auto;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.3)">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8: INTERACTIVE PROTOTYPE (phone-sized) ═══ -->
+    <section class="slide slide-8" data-index="7">
+      <div class="phone-frame">
+        <iframe src="yemen_transfer_secure_asset_exchange.html" title="Interactive Prototype"></iframe>
+      </div>
+    </section>
+
+    <!-- ═══ 9: WATCHTOWER FULL PAGE ═══ -->
+    <section class="slide slide-9" data-index="8">
+      <img src="screens/stitch_screen_splitter_utility/the_watchtower_moi_terminal_dashboard/screen.png" alt="MOI Watchtower Dashboard">
+    </section>
+
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="nav-arrow" id="prevBtn">◀</button>
+  <div class="nav-dots" id="dotsContainer"></div>
+  <button class="nav-arrow" id="nextBtn">▶</button>
+  <span id="slideCounter"></span>
+</div>
+
+<script>
+const track=document.getElementById('track'), slides=track.querySelectorAll('.slide'), dotsContainer=document.getElementById('dotsContainer'), prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn'), counter=document.getElementById('slideCounter');
+let current=0; const total=slides.length;
+for(let i=0;i<total;i++){const d=document.createElement('button');d.className='nav-dot'+(i===0?' active':'');d.dataset.index=i;d.addEventListener('click',()=>goTo(i));dotsContainer.appendChild(d);}
+function goTo(i){if(i<0)i=0;if(i>=total)i=total-1;current=i;track.style.transform=`translateY(-${current*100}vh)`;document.querySelectorAll('.nav-dot').forEach((d,j)=>d.classList.toggle('active',j===current));counter.textContent=`${current+1} / ${total}`;}
+prevBtn.addEventListener('click',()=>goTo(current-1));nextBtn.addEventListener('click',()=>goTo(current+1));
+document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(current+1);}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();goTo(current-1);}});
+let ticking=!1;document.addEventListener('wheel',e=>{if(ticking)return;ticking=!0;setTimeout(()=>ticking=!1,800);e.deltaY>0?goTo(current+1):goTo(current-1);});
+let ts=0;document.addEventListener('touchstart',e=>{ts=e.touches[0].clientY;},{passive:!0});document.addEventListener('touchend',e=>{const d=ts-e.changedTouches[0].clientY;Math.abs(d)>50&&(d>0?goTo(current+1):goTo(current-1));},{passive:!0});
+goTo(0);
+</script>
+</body>
+</html>
