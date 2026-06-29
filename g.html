@@ -30,10 +30,16 @@ body {
   font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
   background: var(--bg-base);
   background-image: var(--bg-gradient);
+  background-size: 200% 200%;
+  animation: bg-shift 20s ease infinite;
   color: var(--text-main);
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+}
+@keyframes bg-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 /* Background Cityscape Outline from image footer */
@@ -95,25 +101,40 @@ body {
 h1 { font-size:52px; font-weight:700; line-height:1.15; letter-spacing:-0.02em; color: var(--slate-900); }
 h2 { font-size:38px; font-weight:700; line-height:1.2; letter-spacing:-0.01em; color: var(--slate-900); }
 h3 { font-size:22px; font-weight:700; margin-bottom: 12px; color: var(--slate-900); }
-.gradient-text { color: var(--primary); }
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), #c0392b, var(--primary), #e74c3c);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shine 5s ease infinite;
+}
+@keyframes gradient-shine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 .subtitle { font-size:18px; font-weight:500; color: var(--text-muted); line-height: 1.6; }
 .body { font-size:15px; line-height:1.6; color: var(--text-muted); }
 
-.tag { display:inline-flex; align-items: center; gap: 6px; padding:6px 16px; border-radius:30px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom: 16px; border: 1px solid var(--card-border); }
+.tag { display:inline-flex; align-items: center; gap: 6px; padding:6px 16px; border-radius:30px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom: 16px; border: 1px solid var(--card-border); animation: tag-pulse 3s ease-in-out infinite; }
 .tag-gold { background: var(--primary-glow); color: var(--primary); border-color: rgba(138, 43, 26, 0.2); }
 .tag-error { background: var(--rose-light); color: var(--rose); border-color: rgba(198, 40, 40, 0.2); }
 .tag-emerald { background: var(--emerald-light); color: var(--emerald); border-color: rgba(30, 107, 75, 0.2); }
+@keyframes tag-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
 
 /* Layouts & Cards */
 .container { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
 .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; }
 
-.glass-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-premium); transition: transform 0.3s, box-shadow 0.3s; }
-.glass-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+.glass-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; box-shadow: var(--shadow-premium); transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s; }
+.glass-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.08), 0 0 40px rgba(138,43,26,0.06); border-color: rgba(138,43,26,0.15); }
 
-.accent-line { width:60px; height:4px; background:var(--primary); border-radius:2px; margin: 24px 0; }
+.accent-line { width:60px; height:4px; background:var(--primary); border-radius:2px; margin: 24px 0; position:relative; overflow:hidden; }
+.accent-line::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: shimmer 3s ease-in-out infinite; }
 .accent-line.error { background: var(--rose); }
+.accent-line.error::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); }
+@keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
 
 /* Watermark Background */
 .watermark-bg {
@@ -167,6 +188,27 @@ h3 { font-size:22px; font-weight:700; margin-bottom: 12px; color: var(--slate-90
   h2 { font-size:30px; }
   .grid-3, .grid-2 { grid-template-columns:1fr; gap: 20px;}
   .mockup-img { height: 50vh; max-height: 400px; }
+}
+
+/* Mobile: scrollable single page */
+@media (max-width:768px) {
+  body { overflow:auto; height:auto; }
+  .slides-wrapper { height:auto; overflow:visible; }
+  .slides-track { transform:none !important; height:auto; }
+  .slide { min-height:auto; padding:60px 24px; }
+  .nav-bar { display:none !important; }
+  .mockup-img { height:auto; max-height:none; width:100%; max-width:320px; }
+  .dash-panel { height:auto !important; }
+  .slide[data-index="8"] { height:100vh; padding:0 !important; }
+  .slide[data-index="8"] iframe { height:100vh !important; }
+  .slide[data-index="7"] .slide-in > div:last-child {
+    width:100% !important; height:600px !important; border-radius:24px !important;
+  }
+  .dragon-tree-bg { display:none; }
+  .city-footer { height:80px; opacity:0.03; }
+  h1 { font-size:30px; }
+  h2 { font-size:24px; }
+  .slide-in { opacity:1; transform:none; }
 }
 </style>
 </head>
@@ -471,6 +513,7 @@ const nextBtn = document.getElementById('nextBtn');
 const counter = document.getElementById('slideCounter');
 let current = 0;
 const total = slides.length;
+const isMobile = window.matchMedia('(max-width:768px)');
 
 for(let i=0; i<total; i++) {
   const d = document.createElement('button');
@@ -509,15 +552,41 @@ function goTo(i) {
   counter.textContent = `${current + 1} / ${total}`;
 }
 
-prevBtn.addEventListener('click', () => goTo(current - 1));
-nextBtn.addEventListener('click', () => goTo(current + 1));
+function activateMobileUI() {
+  track.style.transform = 'none';
+  slides.forEach(s => s.classList.add('active'));
+  animateBars(0);
+}
+
+function activateDesktopUI() {
+  slides.forEach((s, i) => { if(i !== current) s.classList.remove('active'); });
+  goTo(current);
+}
+
+let mobileBound = false;
+function handleMobileChange(e) {
+  if (e.matches) {
+    activateMobileUI();
+    mobileBound = true;
+  } else {
+    activateDesktopUI();
+    mobileBound = false;
+  }
+}
+isMobile.addListener(handleMobileChange);
+handleMobileChange(isMobile);
+
+prevBtn.addEventListener('click', () => { if(!isMobile.matches) goTo(current - 1); });
+nextBtn.addEventListener('click', () => { if(!isMobile.matches) goTo(current + 1); });
 document.addEventListener('keydown', e => {
+  if(isMobile.matches) return;
   if(e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
   if(e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
 });
 
 let ticking = false;
 document.addEventListener('wheel', e => {
+  if(isMobile.matches) return;
   if(ticking) return;
   ticking = true;
   setTimeout(() => ticking = false, 1000);
@@ -527,11 +596,38 @@ document.addEventListener('wheel', e => {
 let ts = 0;
 document.addEventListener('touchstart', e => { ts = e.touches[0].clientY; }, {passive: true});
 document.addEventListener('touchend', e => {
+  if(isMobile.matches) return;
   const d = ts - e.changedTouches[0].clientY;
   if(Math.abs(d) > 50) { d > 0 ? goTo(current + 1) : goTo(current - 1); }
 }, {passive: true});
 
-goTo(0);
+if(!isMobile.matches) goTo(0);
+
+/* Scroll-triggered reveal on mobile */
+if (window.IntersectionObserver) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.slide-in').forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+        const fills = entry.target.querySelectorAll('.bar-fill');
+        fills.forEach(fill => { fill.style.width = fill.getAttribute('data-width'); });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  function updateObserver() {
+    if (isMobile.matches) {
+      slides.forEach(s => obs.observe(s));
+    } else {
+      slides.forEach(s => obs.unobserve(s));
+    }
+  }
+  isMobile.addListener(updateObserver);
+  updateObserver();
+}
 </script>
 </body>
 </html>
